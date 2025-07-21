@@ -1,0 +1,11 @@
+C:\Users\hp\FilmApi\FilmApi.Domain\bin\Debug\net8.0\FilmApi.Domain.deps.json
+C:\Users\hp\FilmApi\FilmApi.Domain\bin\Debug\net8.0\FilmApi.Domain.dll
+C:\Users\hp\FilmApi\FilmApi.Domain\bin\Debug\net8.0\FilmApi.Domain.pdb
+C:\Users\hp\FilmApi\FilmApi.Domain\obj\Debug\net8.0\FilmApi.Domain.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\hp\FilmApi\FilmApi.Domain\obj\Debug\net8.0\FilmApi.Domain.AssemblyInfoInputs.cache
+C:\Users\hp\FilmApi\FilmApi.Domain\obj\Debug\net8.0\FilmApi.Domain.AssemblyInfo.cs
+C:\Users\hp\FilmApi\FilmApi.Domain\obj\Debug\net8.0\FilmApi.Domain.csproj.CoreCompileInputs.cache
+C:\Users\hp\FilmApi\FilmApi.Domain\obj\Debug\net8.0\FilmApi.Domain.dll
+C:\Users\hp\FilmApi\FilmApi.Domain\obj\Debug\net8.0\refint\FilmApi.Domain.dll
+C:\Users\hp\FilmApi\FilmApi.Domain\obj\Debug\net8.0\FilmApi.Domain.pdb
+C:\Users\hp\FilmApi\FilmApi.Domain\obj\Debug\net8.0\ref\FilmApi.Domain.dll
