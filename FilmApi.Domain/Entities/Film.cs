@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-
 namespace FilmApi.Domain.Entities
 {
     public class Film
@@ -21,6 +20,7 @@ namespace FilmApi.Domain.Entities
 
         public int CategoryId { get; set; }
 
+        public ICollection<Category> Categories { get; set; }
         public Category category { get; set; } 
     }
 }

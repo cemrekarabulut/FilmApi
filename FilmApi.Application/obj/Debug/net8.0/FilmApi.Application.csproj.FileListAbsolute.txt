@@ -13,3 +13,4 @@ C:\Users\hp\FilmApi\FilmApi.Application\obj\Debug\net8.0\FilmApi.Application.dll
 C:\Users\hp\FilmApi\FilmApi.Application\obj\Debug\net8.0\refint\FilmApi.Application.dll
 C:\Users\hp\FilmApi\FilmApi.Application\obj\Debug\net8.0\FilmApi.Application.pdb
 C:\Users\hp\FilmApi\FilmApi.Application\obj\Debug\net8.0\ref\FilmApi.Application.dll
+C:\Users\hp\FilmApi\FilmApi.Application\obj\Debug\net8.0\FilmApi.Application.sourcelink.json

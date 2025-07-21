@@ -3170,9 +3170,11 @@
       "AutoMapper >= 15.0.1",
       "AutoMapper.Extensions.Microsoft.DependencyInjection >= 12.0.1",
       "FilmApi.Application >= 1.0.0",
+      "FilmApi.Domain >= 1.0.0",
       "FilmApi.Infrastructure >= 1.0.0",
       "FluentValidation.AspNetCore >= 11.3.1",
       "Microsoft.AspNetCore.OpenApi >= 8.0.18",
+      "Microsoft.EntityFrameworkCore >= 9.0.7",
       "Swashbuckle.AspNetCore >= 6.6.2"
     ]
   },
@@ -3203,6 +3205,9 @@
           "projectReferences": {
             "C:\\Users\\hp\\FilmApi\\FilmApi.Application\\FilmApi.Application.csproj": {
               "projectPath": "C:\\Users\\hp\\FilmApi\\FilmApi.Application\\FilmApi.Application.csproj"
+            },
+            "C:\\Users\\hp\\FilmApi\\FilmApi.Domain\\FilmApi.Domain.csproj": {
+              "projectPath": "C:\\Users\\hp\\FilmApi\\FilmApi.Domain\\FilmApi.Domain.csproj"
             },
             "C:\\Users\\hp\\FilmApi\\FilmApi.Infrastructure\\FilmApi.Infrastructure.csproj": {
               "projectPath": "C:\\Users\\hp\\FilmApi\\FilmApi.Infrastructure\\FilmApi.Infrastructure.csproj"
@@ -3241,6 +3246,10 @@
             "target": "Package",
             "version": "[8.0.18, )"
           },
+          "Microsoft.EntityFrameworkCore": {
+            "target": "Package",
+            "version": "[9.0.7, )"
+          },
           "Swashbuckle.AspNetCore": {
             "target": "Package",
             "version": "[6.6.2, )"
@@ -3274,7 +3283,7 @@
       "code": "NU1608",
       "level": "Warning",
       "warningLevel": 1,
-      "message": "Bağımlılık kısıtlaması dışında algılanan paket sürümü: AutoMapper.Extensions.Microsoft.DependencyInjection 12.0.1, AutoMapper (= 12.0.1) gerektiriyor ancak sürüm AutoMapper 15.0.1 çözümlenmiş.",
+      "message": "Detected package version outside of dependency constraint: AutoMapper.Extensions.Microsoft.DependencyInjection 12.0.1 requires AutoMapper (= 12.0.1) but version AutoMapper 15.0.1 was resolved.",
       "libraryId": "AutoMapper",
       "targetGraphs": [
         "net8.0"

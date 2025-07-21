@@ -29,6 +29,9 @@
               "C:\\Users\\hp\\FilmApi\\FilmApi.Application\\FilmApi.Application.csproj": {
                 "projectPath": "C:\\Users\\hp\\FilmApi\\FilmApi.Application\\FilmApi.Application.csproj"
               },
+              "C:\\Users\\hp\\FilmApi\\FilmApi.Domain\\FilmApi.Domain.csproj": {
+                "projectPath": "C:\\Users\\hp\\FilmApi\\FilmApi.Domain\\FilmApi.Domain.csproj"
+              },
               "C:\\Users\\hp\\FilmApi\\FilmApi.Infrastructure\\FilmApi.Infrastructure.csproj": {
                 "projectPath": "C:\\Users\\hp\\FilmApi\\FilmApi.Infrastructure\\FilmApi.Infrastructure.csproj"
               }
@@ -65,6 +68,10 @@
             "Microsoft.AspNetCore.OpenApi": {
               "target": "Package",
               "version": "[8.0.18, )"
+            },
+            "Microsoft.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[9.0.7, )"
             },
             "Swashbuckle.AspNetCore": {
               "target": "Package",

@@ -9,3 +9,4 @@ C:\Users\hp\FilmApi\FilmApi.Domain\obj\Debug\net8.0\FilmApi.Domain.dll
 C:\Users\hp\FilmApi\FilmApi.Domain\obj\Debug\net8.0\refint\FilmApi.Domain.dll
 C:\Users\hp\FilmApi\FilmApi.Domain\obj\Debug\net8.0\FilmApi.Domain.pdb
 C:\Users\hp\FilmApi\FilmApi.Domain\obj\Debug\net8.0\ref\FilmApi.Domain.dll
+C:\Users\hp\FilmApi\FilmApi.Domain\obj\Debug\net8.0\FilmApi.Domain.sourcelink.json

@@ -7,11 +7,12 @@ namespace FilmApi.Domain.Entities
 {
     public class Category
     {
-        public int CategoryId{ get ; set;}
+        public int CategoryId { get; set; }
 
-        public string CategoryName{ get ; set;}
+        public string CategoryName { get; set; }
 
-        public List<Film> Films { get ; set;}
-
+        public List<Film> Films { get; set; }
+        
+        public ICollection<Film> films { get; set; }
     }
 }

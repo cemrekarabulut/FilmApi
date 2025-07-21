@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "RbpLWutNt2E=",
+  "dgSpecHash": "llxIPd2vlOQ=",
   "success": true,
   "projectFilePath": "C:\\Users\\hp\\FilmApi\\FilmApi.API\\FilmApi.API.csproj",
   "expectedPackageFiles": [
@@ -73,7 +73,7 @@
       "code": "NU1608",
       "level": "Warning",
       "warningLevel": 1,
-      "message": "Bağımlılık kısıtlaması dışında algılanan paket sürümü: AutoMapper.Extensions.Microsoft.DependencyInjection 12.0.1, AutoMapper (= 12.0.1) gerektiriyor ancak sürüm AutoMapper 15.0.1 çözümlenmiş.",
+      "message": "Detected package version outside of dependency constraint: AutoMapper.Extensions.Microsoft.DependencyInjection 12.0.1 requires AutoMapper (= 12.0.1) but version AutoMapper 15.0.1 was resolved.",
       "libraryId": "AutoMapper",
       "targetGraphs": [
         "net8.0"

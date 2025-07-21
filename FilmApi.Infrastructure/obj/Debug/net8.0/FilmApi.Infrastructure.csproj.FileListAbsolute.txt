@@ -15,3 +15,4 @@ C:\Users\hp\FilmApi\FilmApi.Infrastructure\obj\Debug\net8.0\refint\FilmApi.Infra
 C:\Users\hp\FilmApi\FilmApi.Infrastructure\obj\Debug\net8.0\FilmApi.Infrastructure.pdb
 C:\Users\hp\FilmApi\FilmApi.Infrastructure\obj\Debug\net8.0\FilmApi.Infrastructure.genruntimeconfig.cache
 C:\Users\hp\FilmApi\FilmApi.Infrastructure\obj\Debug\net8.0\ref\FilmApi.Infrastructure.dll
+C:\Users\hp\FilmApi\FilmApi.Infrastructure\obj\Debug\net8.0\FilmApi.Infrastructure.sourcelink.json

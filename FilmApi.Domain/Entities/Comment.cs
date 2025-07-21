@@ -7,7 +7,7 @@ namespace FilmApi.Domain.Entities
 {
     public class Comment
     {
-         public int CommentId { get; set; }
+        public int CommentId { get; set; }
 
         public string NameSurname { get; set; }
 
