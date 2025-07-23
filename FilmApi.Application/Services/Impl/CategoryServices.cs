@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using FilmApi.Models.CategoryModels;
 //using FilmApi.Models;
 using FilmApi.Domain.Entities;
-using FilmApi.Domain.Interfaces;
+
 using FilmApi.Infrastructure.Repositories;
 
 namespace FilmApi.API.Services

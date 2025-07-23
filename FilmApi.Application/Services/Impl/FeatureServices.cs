@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using FilmApi.Models.FeatureModels;
 using FilmApi.Domain.Entities;
-using FilmApi.Domain.Interfaces;
+
 using FilmApi.Infrastructure.Repositories;
 
 namespace FilmApi.API.Services

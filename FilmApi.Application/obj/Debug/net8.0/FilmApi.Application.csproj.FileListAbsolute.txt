@@ -1,16 +1,6 @@
-C:\Users\hp\FilmApi\FilmApi.Application\bin\Debug\net8.0\FilmApi.Application.deps.json
-C:\Users\hp\FilmApi\FilmApi.Application\bin\Debug\net8.0\FilmApi.Application.dll
-C:\Users\hp\FilmApi\FilmApi.Application\bin\Debug\net8.0\FilmApi.Application.pdb
-C:\Users\hp\FilmApi\FilmApi.Application\bin\Debug\net8.0\FilmApi.Domain.dll
-C:\Users\hp\FilmApi\FilmApi.Application\bin\Debug\net8.0\FilmApi.Domain.pdb
 C:\Users\hp\FilmApi\FilmApi.Application\obj\Debug\net8.0\FilmApi.Application.csproj.AssemblyReference.cache
 C:\Users\hp\FilmApi\FilmApi.Application\obj\Debug\net8.0\FilmApi.Application.GeneratedMSBuildEditorConfig.editorconfig
 C:\Users\hp\FilmApi\FilmApi.Application\obj\Debug\net8.0\FilmApi.Application.AssemblyInfoInputs.cache
 C:\Users\hp\FilmApi\FilmApi.Application\obj\Debug\net8.0\FilmApi.Application.AssemblyInfo.cs
 C:\Users\hp\FilmApi\FilmApi.Application\obj\Debug\net8.0\FilmApi.Application.csproj.CoreCompileInputs.cache
-C:\Users\hp\FilmApi\FilmApi.Application\obj\Debug\net8.0\FilmApi..5CC2973D.Up2Date
-C:\Users\hp\FilmApi\FilmApi.Application\obj\Debug\net8.0\FilmApi.Application.dll
-C:\Users\hp\FilmApi\FilmApi.Application\obj\Debug\net8.0\refint\FilmApi.Application.dll
-C:\Users\hp\FilmApi\FilmApi.Application\obj\Debug\net8.0\FilmApi.Application.pdb
-C:\Users\hp\FilmApi\FilmApi.Application\obj\Debug\net8.0\ref\FilmApi.Application.dll
 C:\Users\hp\FilmApi\FilmApi.Application\obj\Debug\net8.0\FilmApi.Application.sourcelink.json

@@ -38,14 +38,14 @@ namespace FilmApi.Infrastructure.Repositories.Impl
         return await _dbSet.ToListAsync();
     }
 
-    public async Task<List<TEntity>> GetAllAsync(Expression<Func<TEntity, bool>> predicate)
+   public async Task<List<TEntity>> GetAllAsync(Expression<Func<TEntity, bool>> predicate)
     {
         return await _dbSet.Where(predicate).ToListAsync();
     }
 
-    public async Task<TEntity> GetFirstAsync(Expression<Func<TEntity, bool>> predicate)
+    public Task<TEntity> GetFirstAsync(Expression<Func<TEntity, bool>> predicate) //async ve await sildim
     {
-        return await _dbSet.FirstOrDefaultAsync(predicate);
+        return _dbSet.FirstOrDefaultAsync(predicate);
     }
 
     public async Task<TEntity> GetByIdAsync(int id)
@@ -60,7 +60,6 @@ namespace FilmApi.Infrastructure.Repositories.Impl
         return updated;
     }
 }
-
 }
 
 

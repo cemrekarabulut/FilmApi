@@ -4,7 +4,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using FilmApi.Domain.Entities;
 using FilmApi.Infrastructure.Context;
-using FilmApi.Domain.Interfaces;
 
 
 namespace FilmApi.Infrastructure.Repositories.Impl
