@@ -4,12 +4,16 @@ using System.Linq;
 using System.Threading.Tasks;
 using FilmApi.Domain.Entities;
 using FilmApi.Infrastructure.Context;
+using FilmApi.Domain.Interfaces;
+
 
 namespace FilmApi.Infrastructure.Repositories.Impl
 {
-    public class FeatureRepository(ApiContext context) : BaseRepository<Film>(context), IFeatureRepository
-    {
-        
-    }
+    public class FeatureRepository : BaseRepository<Feature> , IFeatureRepository
+{
+     public FeatureRepository(ApiContext context) : base(context)
+        {
 
+        } 
+}
 }

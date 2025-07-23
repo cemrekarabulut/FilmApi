@@ -2,8 +2,11 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using FilmApi.Domain.Entities;
 using Microsoft.AspNetCore.Mvc;
+using FilmApi.API.Models.CategoryModels;
+using FilmApi.Application.Services;
+using FilmApi.Domain.Entities;
+using FilmApi.Domain.Interfaces;
 
 namespace FilmApi.API.Controllers
 {
@@ -11,40 +14,56 @@ namespace FilmApi.API.Controllers
     [Route("api/[controller]")]
     public class CategoryController : ControllerBase
     {
-        [HttpGet]
-        public IActionResult CategoryList()
-        {
-            var values = _context.Categories.ToList();
-            return Ok(values);
-        }
-        [HttpPost]
+        private readonly ICategoryService _categoryService;
 
-        public IActionResult CreateCategory(Category category)
+        public CategoryController(ICategoryService categoryService)
         {
-            _context.Categories.Add(category);
-            _context.SaveChanges();
-            return Ok("Kategori ekleme işlemi başarılı");
+            _categoryService = categoryService;
         }
-        [HttpDelete]
-        public IActionResult DeleteCategory(int id)
+
+        [HttpGet]
+        public async Task<IActionResult> GetAllCategories()
         {
-            var value = _context.Categories.Find(id);
-            _context.Categories.Remove(value);
-            _context.SaveChanges();
-            return Ok("Kategori silme başarılı");
+            var categories = await _categoryService.GetAllAsync();
+            return Ok(categories);
         }
-        [HttpGet("GetCategory")]
-        public IActionResult GetCategory(int id)
+
+        [HttpPost]
+        public async Task<IActionResult> CreateCategory(CreateCategoryModel model)
         {
-            var value = _context.Categories.Find(id);
-            return Ok(value);
+            await _categoryService.AddAsync(model);
+            return Ok("Kategori başarıyla eklendi.");
         }
+
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetCategory(int id)
+        {
+            var category = await _categoryService.GetByIdAsync(id);
+            if (category == null)
+                return NotFound("Kategori bulunamadı.");
+            return Ok(category);
+        }
+
         [HttpPut]
-        public IActionResult UpdateCategory(Category category)
+        public async Task<IActionResult> UpdateCategory(Category category)
         {
-            _context.Categories.Update(category);
-            _context.SaveChanges();
-            return Ok("Kategori güncelleme işlemi başarılı");
+         _categoryService.UpdateAsync(category);
+            return Ok("Kategori güncellendi.");
+        }
+
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteCategory(int id)
+        {
+            var category = await _categoryService.GetByIdAsync(id);
+            if (category == null)
+                return NotFound("Kategori bulunamadı.");
+         _categoryService.Delete(category);
+            return Ok("Kategori silindi.");
         }
     }
 }
+
+         
+        
+
+        

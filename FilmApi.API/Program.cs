@@ -1,6 +1,10 @@
 
 
+using FilmApi.API.Services;
+using FilmApi.Domain.Interfaces;
 using FilmApi.Infrastructure.Context; // AppDbContext'in namespace'i bu olmalı
+using FilmApi.Infrastructure.Repositories;
+using FilmApi.Infrastructure.Repositories.Impl;
 using Microsoft.EntityFrameworkCore;
 
 
@@ -13,6 +17,21 @@ builder.Services.AddDbContext<ApiContext>(
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+builder.Services.AddScoped(typeof(IBaseRepository<>), typeof(BaseRepository<>));
+
+builder.Services.AddScoped<IActorRepository, ActorRepository>();
+builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
+builder.Services.AddScoped<IFeatureRepository, FeatureRepository>();
+
+builder.Services.AddScoped<ActorService>();
+builder.Services.AddScoped<CategoryService>();
+builder.Services.AddScoped<FeatureService>();
+
+builder.Services.AddScoped<IActorService, ActorService>();
+builder.Services.AddScoped<ICategoryService, CategoryService>();
+builder.Services.AddScoped<IFeatureService, FeatureService>();
+
+
 
 
 var app = builder.Build();

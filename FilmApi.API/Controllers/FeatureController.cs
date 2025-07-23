@@ -2,8 +2,11 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using FilmApi.Domain.Entities;
 using Microsoft.AspNetCore.Mvc;
+using FilmApi.API.Models.FeatureModels;
+using FilmApi.Domain.Interfaces;
+using FilmApi.Application.Services;
+using FilmApi.Domain.Entities;
 
 namespace FilmApi.API.Controllers
 {
@@ -11,40 +14,53 @@ namespace FilmApi.API.Controllers
     [Route("api/[controller]")]
     public class FeatureController : ControllerBase
     {
-         [HttpGet]
-        public IActionResult FeatureList()
-        {
-            var values = _context.Features.ToList();
-            return Ok(values);
-        }
-        [HttpPost]
+        private readonly IFeatureService _featureService;
 
-        public IActionResult CreateFeature(Feature feature)
+        public FeatureController(IFeatureService featureService)
         {
-            _context.Features.Add(feature);
-            _context.SaveChanges();
-            return Ok("Kategori ekleme işlemi başarılı");
+            _featureService = featureService;
         }
-        [HttpDelete]
-        public IActionResult DeleteFeature(int id)
+
+        [HttpGet]
+        public async Task<IActionResult> GetAllFeatures()
         {
-            var value = _context.Features.Find(id);
-            _context.Features.Remove(value);
-            _context.SaveChanges();
-            return Ok("Kategori silme başarılı");
+            var features = await _featureService.GetAllAsync();
+            return Ok(features);
         }
-        [HttpGet("GetCategory")]
-        public IActionResult GetFeature(int id)
+
+        [HttpPost]
+        public async Task<IActionResult> CreateFeature(CreateFeatureModel model)
         {
-            var value = _context.Features.Find(id);
-            return Ok(value);
+            await _featureService.AddAsync(model);
+            return Ok("Özellik başarıyla eklendi.");
         }
+
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetFeature(int id)
+        {
+            var feature = await _featureService.GetByIdAsync(id);
+            if (feature == null)
+                return NotFound("Özellik bulunamadı.");
+            return Ok(feature);
+        }
+
         [HttpPut]
         public IActionResult UpdateFeature(Feature feature)
         {
-            _context.Features.Update(feature);
-            _context.SaveChanges();
-            return Ok("Kategori güncelleme işlemi başarılı");
+            _featureService.UpdateAsync(feature);
+            return Ok("Özellik güncellendi.");
+        }
+
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteFeature(int id)
+        {
+            var feature = await _featureService.GetByIdAsync(id);
+            if (feature == null)
+                return NotFound("Özellik bulunamadı.");
+            _featureService.DeleteAsync(feature);
+            return Ok("Özellik silindi.");
         }
     }
 }
+
+       

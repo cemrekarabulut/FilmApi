@@ -1,0 +1,12 @@
+C:\Users\hp\FilmApi\FilmApi.Models\bin\Debug\net8.0\FilmApi.Models.deps.json
+C:\Users\hp\FilmApi\FilmApi.Models\bin\Debug\net8.0\FilmApi.Models.dll
+C:\Users\hp\FilmApi\FilmApi.Models\bin\Debug\net8.0\FilmApi.Models.pdb
+C:\Users\hp\FilmApi\FilmApi.Models\obj\Debug\net8.0\FilmApi.Models.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\hp\FilmApi\FilmApi.Models\obj\Debug\net8.0\FilmApi.Models.AssemblyInfoInputs.cache
+C:\Users\hp\FilmApi\FilmApi.Models\obj\Debug\net8.0\FilmApi.Models.AssemblyInfo.cs
+C:\Users\hp\FilmApi\FilmApi.Models\obj\Debug\net8.0\FilmApi.Models.csproj.CoreCompileInputs.cache
+C:\Users\hp\FilmApi\FilmApi.Models\obj\Debug\net8.0\FilmApi.Models.sourcelink.json
+C:\Users\hp\FilmApi\FilmApi.Models\obj\Debug\net8.0\FilmApi.Models.dll
+C:\Users\hp\FilmApi\FilmApi.Models\obj\Debug\net8.0\refint\FilmApi.Models.dll
+C:\Users\hp\FilmApi\FilmApi.Models\obj\Debug\net8.0\FilmApi.Models.pdb
+C:\Users\hp\FilmApi\FilmApi.Models\obj\Debug\net8.0\ref\FilmApi.Models.dll

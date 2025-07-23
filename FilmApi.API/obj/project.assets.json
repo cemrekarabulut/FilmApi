@@ -1732,6 +1732,8 @@
         "dependencies": {
           "AutoMapper": "15.0.1",
           "FilmApi.Domain": "1.0.0",
+          "FilmApi.Infrastructure": "1.0.0",
+          "FilmApi.Models": "1.0.0",
           "FluentValidation": "12.0.0"
         },
         "compile": {
@@ -1764,6 +1766,16 @@
         },
         "runtime": {
           "bin/placeholder/FilmApi.Infrastructure.dll": {}
+        }
+      },
+      "FilmApi.Models/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v8.0",
+        "compile": {
+          "bin/placeholder/FilmApi.Models.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/FilmApi.Models.dll": {}
         }
       }
     }
@@ -5056,6 +5068,11 @@
       "type": "project",
       "path": "../FilmApi.Infrastructure/FilmApi.Infrastructure.csproj",
       "msbuildProject": "../FilmApi.Infrastructure/FilmApi.Infrastructure.csproj"
+    },
+    "FilmApi.Models/1.0.0": {
+      "type": "project",
+      "path": "../FilmApi.Models/FilmApi.Models.csproj",
+      "msbuildProject": "../FilmApi.Models/FilmApi.Models.csproj"
     }
   },
   "projectFileDependencyGroups": {

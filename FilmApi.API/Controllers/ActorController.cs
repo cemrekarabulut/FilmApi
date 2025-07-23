@@ -2,8 +2,13 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using FilmApi.Domain.Entities;
 using Microsoft.AspNetCore.Mvc;
+using FilmApi.Domain.Entities;
+using FilmApi.Domain.Interfaces;
+using FilmApi.Application.Services;
+using FilmApi.API.Models;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using FilmApi.API.Services;
 
 namespace FilmApi.API.Controllers
 {
@@ -11,39 +16,52 @@ namespace FilmApi.API.Controllers
     [Route("api/[controller]")]
     public class ActorController : ControllerBase
     {
-         [HttpGet]
-        public IActionResult ActorList()
-        {
-            var values = _context.Actor.ToList();
-            return Ok(values);
-        }
-        [HttpPost]
+        private readonly IActorService _actorService;
 
-        public IActionResult CreateActor(Actor actor)
+        public ActorController(IActorService actorService)
         {
-            _context.Actors.Add(actor);
-            _context.SaveChanges();
+           _actorService = actorService;
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> ActorList()
+        {
+            var actors = await _actorService.GetAllActorsAsync();
+            return Ok(actors);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> CreateActor(CreateActorModel model)
+        {
+            await _actorService.AddAsync(model); 
             return Ok("Aktör ekleme işlemi başarılı");
         }
-        [HttpDelete]
-        public IActionResult DeleteActor(int id)
+
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteActor(int id)
         {
-            var value = _context.Actors.Find(id);
-            _context.Actors.Remove(value);
-            _context.SaveChanges();
+            var actor = await _actorService.GetByIdAsync(id);
+            if (actor == null)
+                return NotFound("Aktör bulunamadı");
+
+            _actorService.DeleteAsync(actor);
             return Ok("Aktör silme başarılı");
         }
-        [HttpGet("GetActor")]
-        public IActionResult GetActor(int id)
+
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetActor(int id)
         {
-            var value = _context.Actors.Find(id);
-            return Ok(value);
+            var actor = await _actorService.GetByIdAsync(id);
+            if (actor == null)
+                return NotFound("Aktör bulunamadı");
+
+            return Ok(actor);
         }
+
         [HttpPut]
         public IActionResult UpdateActor(Actor actor)
         {
-            _context.Categories.Update(actor);
-            _context.SaveChanges();
+            _actorService.UpdateAsync(actor);
             return Ok("Aktör güncelleme işlemi başarılı");
         }
     }

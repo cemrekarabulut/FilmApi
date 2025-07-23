@@ -8,8 +8,11 @@ using FilmApi.Infrastructure.Context;
 
 namespace FilmApi.Infrastructure.Repositories.Impl
 {
-    public class CategoryRepository(ApiContext context) : BaseRepository<Category>(context), ICategoryRepository
+    public class CategoryRepository : BaseRepository<Category>, ICategoryRepository
+{
+    public CategoryRepository(ApiContext context) : base(context)
     {
     }
-    
+}
+
 }
