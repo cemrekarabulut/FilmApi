@@ -3,15 +3,19 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
-namespace FilmApi.Infrastructure.Context;
 using FilmApi.Domain.Entities;
+namespace FilmApi.Infrastructure.Context;
+
 
 
 public class ApiContext : DbContext
 {
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
-        optionsBuilder.UseSqlServer("Server=LAPTOP-PS5F1P6O\\SQLEXPRESS;Initial Catalog=ApiYummyDb;Integrated Security=True;TrustServerCertificate=True;");
+         if (!optionsBuilder.IsConfigured)
+    {
+        optionsBuilder.UseSqlServer("Server=LAPTOP-PS5F1P6O\\SQLEXPRESS;Initial Catalog=ApiFilmDb;Integrated Security=True;TrustServerCertificate=True;");
+    }
 
     }
     public DbSet<Actor> Actors { get; set; }
@@ -30,6 +34,10 @@ public class ApiContext : DbContext
 
     base.OnModelCreating(modelBuilder);
 }
+    public ApiContext(DbContextOptions<ApiContext> options) : base(options)
+    {
+    
+}
 
- 
-    }
+ }
+    

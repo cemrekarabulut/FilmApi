@@ -30,7 +30,7 @@ namespace FilmApi.Application.Mappers
 
             CreateMap<Category, CreateCategoryDto>().ReverseMap();
             CreateMap<Category, GetByIdCategoryDto>().ReverseMap();
-            CreateMap<Category, UpdateCategoryDto().ReverseMap();
+            CreateMap<Category, UpdateCategoryDto>().ReverseMap();
             CreateMap<Category, ResultCategoryDto>().ReverseMap();
 
             CreateMap<Comment, CreateCommentDto>().ReverseMap();

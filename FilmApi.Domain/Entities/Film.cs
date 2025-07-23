@@ -20,7 +20,7 @@ namespace FilmApi.Domain.Entities
 
         public int CategoryId { get; set; }
 
-        public ICollection<Category> Categories { get; set; }
-        public Category category { get; set; } 
+        public ICollection<Category> Categories { get; set; } = new List<Category>();
+         
     }
 }

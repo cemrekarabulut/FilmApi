@@ -11,8 +11,6 @@ namespace FilmApi.Domain.Entities
 
         public string CategoryName { get; set; }
 
-        public List<Film> Films { get; set; }
-        
-        public ICollection<Film> films { get; set; }
+        public ICollection<Film> Films { get; set; } = new List<Film>();
     }
 }
