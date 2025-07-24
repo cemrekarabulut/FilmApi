@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using FilmApi.Models.ActorModels;
+using FilmApi.Application.Service;
 using FilmApi.Domain.Entities;
-
 using FilmApi.Infrastructure.Repositories;
 
-namespace FilmApi.API.Services
+namespace FilmApi.Application.Service.Impl
 {
     public class ActorService : IActorService
     {
@@ -18,7 +18,7 @@ namespace FilmApi.API.Services
             _actorRepository = actorRepository;
         }
 
-        public async Task<List<CreateActorModel>> GetAllActorsAsync()
+        public async Task<List<CreateActorModel>> GetAllAsync()
         {
             var actors = await _actorRepository.GetAllAsync();
             return actors.Select(a => new CreateActorModel

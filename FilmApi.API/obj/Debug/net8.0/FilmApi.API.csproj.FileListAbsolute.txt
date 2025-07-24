@@ -1,0 +1,8 @@
+C:\Users\hp\FilmApi\FilmApi.API\obj\Debug\net8.0\FilmApi.API.csproj.AssemblyReference.cache
+C:\Users\hp\FilmApi\FilmApi.API\obj\Debug\net8.0\FilmApi.API.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\hp\FilmApi\FilmApi.API\obj\Debug\net8.0\FilmApi.API.AssemblyInfoInputs.cache
+C:\Users\hp\FilmApi\FilmApi.API\obj\Debug\net8.0\FilmApi.API.AssemblyInfo.cs
+C:\Users\hp\FilmApi\FilmApi.API\obj\Debug\net8.0\FilmApi.API.csproj.CoreCompileInputs.cache
+C:\Users\hp\FilmApi\FilmApi.API\obj\Debug\net8.0\FilmApi.API.MvcApplicationPartsAssemblyInfo.cs
+C:\Users\hp\FilmApi\FilmApi.API\obj\Debug\net8.0\FilmApi.API.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\hp\FilmApi\FilmApi.API\obj\Debug\net8.0\FilmApi.API.sourcelink.json

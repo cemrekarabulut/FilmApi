@@ -4,11 +4,9 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using FilmApi.Domain.Entities;
-using FilmApi.Domain.Interfaces;
-using FilmApi.Application.Services;
-using FilmApi.API.Models;
+using FilmApi.Application.Service;
+using FilmApi.API.Models.ActorModels;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
-using FilmApi.API.Services;
 
 namespace FilmApi.API.Controllers
 {

@@ -3,19 +3,19 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using FilmApi.Models.CategoryModels;
+using FilmApi.Application.Service;
 using FilmApi.Domain.Entities;
 using System.Threading.Tasks;
-//using FilmApi.Models;  
+using FilmApi.Models;  
 
-namespace FilmApi.Application.Services
+namespace FilmApi.Application.Service
 {
-    public interface ICategoryServices
+    public interface ICategoryService
     {
     Task<List<CreateCategoryModel>> GetAllAsync();
     Task AddAsync(CreateCategoryModel model);
     Task<Category?> GetByIdAsync(int id);
-    void Update(Category category);
-    void Delete(Category category);
-}
-
+    Task UpdateAsync(Category category);
+    Task DeleteAsync(Category category);
     }
+}

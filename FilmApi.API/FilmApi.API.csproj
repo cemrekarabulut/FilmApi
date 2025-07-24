@@ -23,6 +23,7 @@
     <ProjectReference Include="..\FilmApi.Application\FilmApi.Application.csproj" />
     <ProjectReference Include="..\FilmApi.Infrastructure\FilmApi.Infrastructure.csproj" />
     <ProjectReference Include="..\FilmApi.Domain\FilmApi.Domain.csproj" />
+    <ProjectReference Include="..\FilmApi.Models\FilmApi.Models.csproj" />
   </ItemGroup>
 
 </Project>

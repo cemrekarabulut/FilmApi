@@ -10,7 +10,7 @@ namespace FilmApi.Infrastructure.Repositories
     {
         Task<TEntity> AddAsync(TEntity entity);
         Task<TEntity> DeleteAsync(TEntity entity);
-        Task<List<TEntity>> GetAllAsync(Expression<Func<TEntity, bool>> predicate);
+        Task<List<TEntity>> GetAllAsync(Expression<Func<TEntity, bool>> predicate = null);
         Task<TEntity> GetFirstAsync(Expression<Func<TEntity, bool>> predicate);
         Task<TEntity> GetByIdAsync(int id);
         Task<TEntity> UpdateAsync(TEntity entity);

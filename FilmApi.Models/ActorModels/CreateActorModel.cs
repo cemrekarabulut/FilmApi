@@ -9,6 +9,7 @@ namespace FilmApi.Models.ActorModels
     public class CreateActorModel
     {
         public int ActorId { get; set; }
+        
         public string NameSurname { get; set; }
 
         public string Gender { get; set; }

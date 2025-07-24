@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using FilmApi.Models.FeatureModels;
+using FilmApi.Application.Service;
 using FilmApi.Domain.Entities;
-
 using FilmApi.Infrastructure.Repositories;
 
-namespace FilmApi.API.Services
+namespace FilmApi.Application.Services.Impl
 {
     public class FeatureService :IFeatureService
     {

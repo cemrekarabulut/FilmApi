@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using FilmApi.Models.CategoryModels;
-//using FilmApi.Models;
+using FilmApi.Application.Service;
+using FilmApi.Models;
 using FilmApi.Domain.Entities;
-
 using FilmApi.Infrastructure.Repositories;
 
-namespace FilmApi.API.Services
+namespace FilmApi.Application.Services.Impl
 {
     public class CategoryService : ICategoryService
     {
@@ -44,19 +44,9 @@ namespace FilmApi.API.Services
             await _categoryRepository.UpdateAsync(category);
         }
 
-        public async Task Delete(Category category)
+        public async Task DeleteAsync(Category category)
         {
             await _categoryRepository.DeleteAsync(category);
-        }
-
-        public void Update(Category category)
-        {
-            throw new NotImplementedException();
-        }
-
-        void ICategoryService.Delete(Category category)
-        {
-            throw new NotImplementedException();
         }
     }
 

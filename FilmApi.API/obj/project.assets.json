@@ -5082,6 +5082,7 @@
       "FilmApi.Application >= 1.0.0",
       "FilmApi.Domain >= 1.0.0",
       "FilmApi.Infrastructure >= 1.0.0",
+      "FilmApi.Models >= 1.0.0",
       "FluentValidation.AspNetCore >= 11.3.1",
       "Microsoft.AspNetCore.OpenApi >= 8.0.18",
       "Microsoft.EntityFrameworkCore >= 9.0.7",
@@ -5122,6 +5123,9 @@
             },
             "C:\\Users\\hp\\FilmApi\\FilmApi.Infrastructure\\FilmApi.Infrastructure.csproj": {
               "projectPath": "C:\\Users\\hp\\FilmApi\\FilmApi.Infrastructure\\FilmApi.Infrastructure.csproj"
+            },
+            "C:\\Users\\hp\\FilmApi\\FilmApi.Models\\FilmApi.Models.csproj": {
+              "projectPath": "C:\\Users\\hp\\FilmApi\\FilmApi.Models\\FilmApi.Models.csproj"
             }
           }
         }
