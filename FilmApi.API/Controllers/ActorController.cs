@@ -5,8 +5,9 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using FilmApi.Domain.Entities;
 using FilmApi.Application.Service;
-using FilmApi.API.Models.ActorModels;
+using FilmApi.Models.ActorModels;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using FilmApi.Application.DTOs.ActorDto;
 
 namespace FilmApi.API.Controllers
 {
@@ -24,14 +25,14 @@ namespace FilmApi.API.Controllers
         [HttpGet]
         public async Task<IActionResult> ActorList()
         {
-            var actors = await _actorService.GetAllActorsAsync();
+            var actors = await _actorService.GetAllAsync();
             return Ok(actors);
         }
 
         [HttpPost]
-        public async Task<IActionResult> CreateActor(CreateActorModel model)
+        public async Task<IActionResult> CreateActor(CreateActorDto createActor)
         {
-            await _actorService.AddAsync(model); 
+            await _actorService.AddAsync(createActor); 
             return Ok("Aktör ekleme işlemi başarılı");
         }
 
@@ -42,7 +43,7 @@ namespace FilmApi.API.Controllers
             if (actor == null)
                 return NotFound("Aktör bulunamadı");
 
-            _actorService.DeleteAsync(actor);
+            await _actorService.DeleteAsync(id);
             return Ok("Aktör silme başarılı");
         }
 
@@ -57,9 +58,9 @@ namespace FilmApi.API.Controllers
         }
 
         [HttpPut]
-        public IActionResult UpdateActor(Actor actor)
+        public IActionResult UpdateActor(UpdateActorDto updateActor)
         {
-            _actorService.UpdateAsync(actor);
+            _actorService.UpdateAsync(updateActor);
             return Ok("Aktör güncelleme işlemi başarılı");
         }
     }

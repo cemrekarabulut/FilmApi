@@ -3,9 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using FilmApi.API.Models.FeatureModels;
+using FilmApi.Models.FeatureModels;
 using FilmApi.Application.Service;
 using FilmApi.Domain.Entities;
+using FilmApi.Application.DTOs.FeatureDto;
 
 namespace FilmApi.API.Controllers
 {
@@ -28,9 +29,9 @@ namespace FilmApi.API.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> CreateFeature(CreateFeatureModel model)
+        public async Task<IActionResult> CreateFeature(CreateFeatureDto createFeature)
         {
-            await _featureService.AddAsync(model);
+            await _featureService.AddAsync(createFeature);
             return Ok("Özellik başarıyla eklendi.");
         }
 
@@ -44,9 +45,9 @@ namespace FilmApi.API.Controllers
         }
 
         [HttpPut]
-        public IActionResult UpdateFeature(Feature feature)
+        public IActionResult UpdateFeature(UpdateFeatureDto updateFeature)
         {
-            _featureService.UpdateAsync(feature);
+            _featureService.UpdateAsync(updateFeature);
             return Ok("Özellik güncellendi.");
         }
 
@@ -56,7 +57,7 @@ namespace FilmApi.API.Controllers
             var feature = await _featureService.GetByIdAsync(id);
             if (feature == null)
                 return NotFound("Özellik bulunamadı.");
-            _featureService.DeleteAsync(feature);
+            await _featureService.DeleteAsync(id);
             return Ok("Özellik silindi.");
         }
     }

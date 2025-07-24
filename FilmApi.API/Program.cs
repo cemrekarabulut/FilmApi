@@ -1,42 +1,36 @@
-
-
-using FilmApi.API.Services;
-using FilmApi.Domain.Interfaces;
-using FilmApi.Infrastructure.Context; // AppDbContext'in namespace'i bu olmalı
+using FilmApi.Application.Service;
+using FilmApi.Application.Service.Impl;
+using FilmApi.Infrastructure.Context;
 using FilmApi.Infrastructure.Repositories;
 using FilmApi.Infrastructure.Repositories.Impl;
 using Microsoft.EntityFrameworkCore;
 
-
 var builder = WebApplication.CreateBuilder(args);
-builder.Services.AddDbContext<ApiContext>(
-    options => options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
+builder.Services.AddDbContext<ApiContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
-// Add services to the container.
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-builder.Services.AddScoped(typeof(IBaseRepository<>), typeof(BaseRepository<>));
 
+// Repositories
+builder.Services.AddScoped(typeof(IBaseRepository<>), typeof(BaseRepository<>));
 builder.Services.AddScoped<IActorRepository, ActorRepository>();
 builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
 builder.Services.AddScoped<IFeatureRepository, FeatureRepository>();
 
-builder.Services.AddScoped<ActorService>();
-builder.Services.AddScoped<CategoryService>();
-builder.Services.AddScoped<FeatureService>();
-
+// Services
 builder.Services.AddScoped<IActorService, ActorService>();
 builder.Services.AddScoped<ICategoryService, CategoryService>();
 builder.Services.AddScoped<IFeatureService, FeatureService>();
+builder.Services.AddAutoMapper(typeof(FilmApi.Application.Mappers.GeneralMapping));
 
 
-
+// ⚠️ EKLENDİ
+builder.Services.AddControllers();
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
@@ -45,32 +39,7 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
-var summaries = new[]
-{
-    "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
-};
-
-app.MapGet("/weatherforecast", () =>
-{
-    var forecast =  Enumerable.Range(1, 5).Select(index =>
-        new WeatherForecast
-        (
-            DateOnly.FromDateTime(DateTime.Now.AddDays(index)),
-            Random.Shared.Next(-20, 55),
-            summaries[Random.Shared.Next(summaries.Length)]
-        ))
-        .ToArray();
-    return forecast;
-})
-.WithName("GetWeatherForecast")
-.WithOpenApi();
-
+// ⚠️ EKLENDİ
+app.MapControllers();
 
 app.Run();
-
-record WeatherForecast(DateOnly Date, int TemperatureC, string? Summary)
-{
-    public int TemperatureF => 32 + (int)(TemperatureC / 0.5556);
-}
-
-

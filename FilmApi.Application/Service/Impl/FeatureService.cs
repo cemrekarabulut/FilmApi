@@ -6,49 +6,52 @@ using FilmApi.Models.FeatureModels;
 using FilmApi.Application.Service;
 using FilmApi.Domain.Entities;
 using FilmApi.Infrastructure.Repositories;
+using AutoMapper;
+using FilmApi.Application.DTOs.FeatureDto;
 
-namespace FilmApi.Application.Services.Impl
+namespace FilmApi.Application.Service.Impl
 {
     public class FeatureService :IFeatureService
     {
         private readonly IFeatureRepository _featureRepository;
-
-        public FeatureService(IFeatureRepository featureRepository)
+        private readonly IMapper _mapper;
+        public FeatureService(IFeatureRepository featureRepository, IMapper mapper)
         {
             _featureRepository = featureRepository;
+            _mapper = mapper;
         }
 
-        public async Task<List<CreateFeatureModel>> GetAllAsync()
+        public async Task<List<ResultFeatureDto>> GetAllAsync()
         {
             var features = await _featureRepository.GetAllAsync();
-            return features.Select(f => new CreateFeatureModel
-            {
-                Job = f.Job 
-            }).ToList();
+             return _mapper.Map<List<ResultFeatureDto>>(features);
         }
 
-        public async Task AddAsync(CreateFeatureModel model)
+        public async Task AddAsync(CreateFeatureDto createFeature)
         {
-            var feature = new Feature
-            {
-                Job = model.Job
-            };
+           var feature = _mapper.Map<Feature>(createFeature);
             await _featureRepository.AddAsync(feature);
         }
 
-        public async Task<Feature?> GetByIdAsync(int id)
+        public async Task<ResultFeatureDto> GetByIdAsync(int id)
         {
-            return await _featureRepository.GetByIdAsync(id);
+           var feature = await _featureRepository.GetByIdAsync(id);
+            return _mapper.Map<ResultFeatureDto>(feature); 
         }
 
-        public async Task UpdateAsync(Feature feature)
+        public async Task UpdateAsync(UpdateFeatureDto updateFeature)
         {
+            var feature = _mapper.Map<Feature>(updateFeature);
             await _featureRepository.UpdateAsync(feature);
         }
 
-        public async Task DeleteAsync(Feature feature)
+        public async Task DeleteAsync(int id)
         {
-            await _featureRepository.DeleteAsync(feature);
+            var feature = await _featureRepository.GetByIdAsync(id);
+            if (feature != null)
+            {
+                await _featureRepository.DeleteAsync(feature);
+            }
         }
     }
 }

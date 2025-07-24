@@ -6,48 +6,50 @@ using FilmApi.Models.ActorModels;
 using FilmApi.Application.Service;
 using FilmApi.Domain.Entities;
 using FilmApi.Infrastructure.Repositories;
+using AutoMapper;
+using FilmApi.Application.DTOs.ActorDto;
 
 namespace FilmApi.Application.Service.Impl
 {
     public class ActorService : IActorService
     {
         private readonly IActorRepository _actorRepository;
-
-        public ActorService(IActorRepository actorRepository)
+        private readonly IMapper _mapper;
+        public ActorService(IActorRepository actorRepository, IMapper mapper)
         {
             _actorRepository = actorRepository;
+            _mapper = mapper;
         }
 
-        public async Task<List<CreateActorModel>> GetAllAsync()
+        public async Task<List<ResultActorDto>> GetAllAsync()
         {
             var actors = await _actorRepository.GetAllAsync();
-            return actors.Select(a => new CreateActorModel
-            {
-               // ActorId = a.ActorId, 
-                NameSurname = a.NameSurname
-            }).ToList();
+            return _mapper.Map<List<ResultActorDto>>(actors);
         }
 
-        public async Task AddAsync(CreateActorModel model)
+        public async Task AddAsync(CreateActorDto createActor)
         {
-            var actor = new Actor
-            {
-                NameSurname = model.NameSurname
-            };
+            var actor = _mapper.Map<Actor>(createActor);
             await _actorRepository.AddAsync(actor);
         }
-        public async Task<Actor?> GetByIdAsync(int id)
+        public async Task<ResultActorDto> GetByIdAsync(int id)
         {
-            return await _actorRepository.GetByIdAsync(id);
+            var actor = await _actorRepository.GetByIdAsync(id);
+            return _mapper.Map<ResultActorDto>(actor);
         }
 
-        public async Task DeleteAsync(Actor actor)
+        public async Task DeleteAsync(int id)
         {
-            await _actorRepository.DeleteAsync(actor);
+            var actor = await _actorRepository.GetByIdAsync(id);
+            if (actor != null)
+            {
+                await _actorRepository.DeleteAsync(actor);
+            }
         }
 
-        public async Task UpdateAsync(Actor actor)
+        public async Task UpdateAsync(UpdateActorDto updateActor)
         {
+            var actor = _mapper.Map<Actor>(updateActor);
             await _actorRepository.UpdateAsync(actor);
         }
         

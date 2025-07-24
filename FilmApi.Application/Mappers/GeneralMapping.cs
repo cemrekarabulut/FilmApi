@@ -42,6 +42,26 @@ namespace FilmApi.Application.Mappers
             CreateMap<Feature, GetByIdFeatureDto>().ReverseMap();
             CreateMap<Feature, UpdateFeatureDto>().ReverseMap();
             CreateMap<Feature, ResultFeatureDto>().ReverseMap();
+
+
+            /* CreateMap<CreateFilmWithoutCategoryIdDto, Film>()
+             .ForMember(dest => dest.FilmName, opt => opt.MapFrom(src => src.FilmName))
+             .ForMember(dest => dest.FilmId, opt => opt.Ignore());*/
+            
+             CreateMap<CreateFilmWithoutCategoryIdDto, Film>()
+            .ForMember(dest => dest.CategoryId, opt => opt.Ignore())  // DTO'da yoksa ignore et
+            .ForMember(dest => dest.FilmId, opt => opt.Ignore());  // Id otomatik olsun
+
+
+            CreateMap<CreateCategoryDto, Category>()
+            .ForMember(dest => dest.CategoryId, opt => opt.Ignore())
+            .ForMember(dest => dest.CategoryName, opt => opt.MapFrom(src => src.CategoryName))
+            .ForMember(dest => dest.Films, opt => opt.MapFrom(src => src.Films));
+
+
+            CreateMap<CreateCategoryDto, Category>()
+            .ForMember(dest => dest.Films, opt => opt.MapFrom(src => src.Films));
+            CreateMap<CreateFilmWithoutCategoryIdDto, Film>();
         }
     }
 }

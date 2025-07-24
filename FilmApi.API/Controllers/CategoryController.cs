@@ -3,9 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using FilmApi.API.Models.CategoryModels;
+//using FilmApi.Models.CategoryModels;
 using FilmApi.Application.Service;
-using FilmApi.Domain.Entities;
+//using FilmApi.Domain.Entities;
+using FilmApi.Application.DTOs.CategoryDto;
 
 namespace FilmApi.API.Controllers
 {
@@ -23,14 +24,19 @@ namespace FilmApi.API.Controllers
         [HttpGet]
         public async Task<IActionResult> GetAllCategories()
         {
-            var categories = await _categoryService.GetAllAsync();
+             List<ResultCategoryDto> categories = await _categoryService.GetAllAsync();
             return Ok(categories);
         }
-
-        [HttpPost]
-        public async Task<IActionResult> CreateCategory(CreateCategoryModel model)
+        [HttpGet("withFilms")]
+        public async Task<IActionResult> GetAllCategoriesWithFilms()
         {
-            await _categoryService.AddAsync(model);
+             List<ResultCategoryWithFilmsDto> categories = await _categoryService.GetAllWithFilmsAsync();
+            return Ok(categories);
+        }
+        [HttpPost]
+        public async Task<IActionResult> CreateCategory(CreateCategoryDto createCategory)
+        {
+            await _categoryService.AddAsync(createCategory);
             return Ok("Kategori başarıyla eklendi.");
         }
 
@@ -44,9 +50,9 @@ namespace FilmApi.API.Controllers
         }
 
         [HttpPut]
-        public async Task<IActionResult> UpdateCategory(Category category)
+        public async Task<IActionResult> UpdateCategory(UpdateCategoryDto updateCategory)
         {
-         _categoryService.UpdateAsync(category);
+         await _categoryService.UpdateAsync(updateCategory);
             return Ok("Kategori güncellendi.");
         }
 
@@ -56,7 +62,7 @@ namespace FilmApi.API.Controllers
             var category = await _categoryService.GetByIdAsync(id);
             if (category == null)
                 return NotFound("Kategori bulunamadı.");
-         _categoryService.Delete(category);
+            await _categoryService.DeleteAsync(id);
             return Ok("Kategori silindi.");
         }
     }

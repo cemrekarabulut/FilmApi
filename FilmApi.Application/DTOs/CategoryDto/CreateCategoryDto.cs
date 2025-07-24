@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using FilmApi.Application.DTOs.FilmDto;
 using FilmApi.Domain.Entities; // veya Film class'ı hangi namespace içindeyse
 
 
@@ -11,6 +12,6 @@ namespace FilmApi.Application.DTOs.CategoryDto
     {
         public string CategoryName{ get ; set;}
 
-        public List<Film> Films { get ; set;} 
+        public List<CreateFilmWithoutCategoryIdDto> Films { get ; set;} 
     }
 }
