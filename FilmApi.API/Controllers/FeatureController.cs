@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using FilmApi.Models.FeatureModels;
 using FilmApi.Application.Service;
 using FilmApi.Domain.Entities;
 using FilmApi.Application.DTOs.FeatureDto;
@@ -45,9 +44,9 @@ namespace FilmApi.API.Controllers
         }
 
         [HttpPut]
-        public IActionResult UpdateFeature(UpdateFeatureDto updateFeature)
+        public async Task<IActionResult> UpdateFeature(UpdateFeatureDto updateFeature)
         {
-            _featureService.UpdateAsync(updateFeature);
+            await _featureService.UpdateAsync(updateFeature);
             return Ok("Özellik güncellendi.");
         }
 

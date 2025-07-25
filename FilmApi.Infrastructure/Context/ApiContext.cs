@@ -23,7 +23,6 @@ public class ApiContext : DbContext
     public DbSet<Comment> Comments { get; set; }
     public DbSet<Feature> Features { get; set; }
     public DbSet<Film> Films { get; set; }
-    public DbSet<Image> Images { get; set; } 
 
        protected override void OnModelCreating(ModelBuilder modelBuilder)
 {

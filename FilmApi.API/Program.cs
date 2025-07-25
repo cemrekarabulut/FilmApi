@@ -5,6 +5,8 @@ using FilmApi.Infrastructure.Repositories;
 using FilmApi.Infrastructure.Repositories.Impl;
 using Microsoft.EntityFrameworkCore;
 
+
+
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddDbContext<ApiContext>(options =>
@@ -18,12 +20,15 @@ builder.Services.AddScoped(typeof(IBaseRepository<>), typeof(BaseRepository<>));
 builder.Services.AddScoped<IActorRepository, ActorRepository>();
 builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
 builder.Services.AddScoped<IFeatureRepository, FeatureRepository>();
+builder.Services.AddScoped<ICommentRepository, CommentRepository>();
+
 
 // Services
 builder.Services.AddScoped<IActorService, ActorService>();
 builder.Services.AddScoped<ICategoryService, CategoryService>();
 builder.Services.AddScoped<IFeatureService, FeatureService>();
 builder.Services.AddAutoMapper(typeof(FilmApi.Application.Mappers.GeneralMapping));
+builder.Services.AddScoped<ICommentService, CommentService>();
 
 
 // ⚠️ EKLENDİ

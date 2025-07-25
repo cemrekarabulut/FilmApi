@@ -14,8 +14,6 @@ namespace FilmApi.Domain.Entities
 
         public decimal TicketPrice { get; set; }
 
-        public string ImageUrl { get; set; }
-
         public int Imdb{ get; set;}
 
         public int CategoryId { get; set; }
