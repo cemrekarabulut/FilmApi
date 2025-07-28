@@ -8,7 +8,7 @@ namespace FilmApi.Infrastructure.Repositories
 {
     public interface IFeatureRepository : IBaseRepository<Feature>
     {
-        //Task<FilmApi.API.Models.FeatureModels.FeatureModel> CreateAsync(FilmApi.API.Models.FeatureModels.FeatureModel model, CancellationToken cancellationToken);
+        
     }
 }
     

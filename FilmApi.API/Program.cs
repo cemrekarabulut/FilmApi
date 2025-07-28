@@ -17,18 +17,22 @@ builder.Services.AddSwaggerGen();
 
 // Repositories
 builder.Services.AddScoped(typeof(IBaseRepository<>), typeof(BaseRepository<>));
-builder.Services.AddScoped<IActorRepository, ActorRepository>();
+builder.Services.AddScoped<IPersonRepository, PersonRepository>();
 builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
 builder.Services.AddScoped<IFeatureRepository, FeatureRepository>();
 builder.Services.AddScoped<ICommentRepository, CommentRepository>();
+builder.Services.AddScoped<IFilmRepository, FilmRepository>();
+
 
 
 // Services
-builder.Services.AddScoped<IActorService, ActorService>();
+builder.Services.AddScoped<IPersonService, PersonService>();
 builder.Services.AddScoped<ICategoryService, CategoryService>();
 builder.Services.AddScoped<IFeatureService, FeatureService>();
 builder.Services.AddAutoMapper(typeof(FilmApi.Application.Mappers.GeneralMapping));
 builder.Services.AddScoped<ICommentService, CommentService>();
+builder.Services.AddScoped<IFilmService, FilmService>();
+
 
 
 // ⚠️ EKLENDİ

@@ -44,8 +44,6 @@ namespace FilmApi.Infrastructure.Repositories.Impl
         return await _context.Set<TEntity>().ToListAsync();
         return await _context.Set<TEntity>().Where(predicate).ToListAsync(); 
 
-        //await _repository.GetAllAsync(x => true); bunu da yapabilirdik
-
     }
 
     public Task<TEntity> GetFirstAsync(Expression<Func<TEntity, bool>> predicate) //async ve await sildim

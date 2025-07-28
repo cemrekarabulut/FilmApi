@@ -8,9 +8,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace FilmApi.Infrastructure.Repositories.Impl
 {
-    public class ActorRepository(ApiContext context) : BaseRepository<Actor>(context), IActorRepository
+    public class PersonRepository(ApiContext context) : BaseRepository<Person>(context), IPersonRepository
     {
-        public async Task<Actor> GetActorByName(string name)
+        public async Task<Person> GetPersonByName(string name)
         {
             return await _dbSet.FirstOrDefaultAsync(x => x.NameSurname == name);
         }

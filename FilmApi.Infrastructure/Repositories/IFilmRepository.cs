@@ -6,10 +6,9 @@ using FilmApi.Domain.Entities;
 
 namespace FilmApi.Infrastructure.Repositories
 {
-    public interface IActorRepository : IBaseRepository<Actor>
+    public interface IFilmRepository : IBaseRepository<Film>
     {
-        Task<Actor> GetActorByName(string name);
+        
     }
 }
-
     

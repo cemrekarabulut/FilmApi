@@ -1,11 +1,3 @@
-C:\Users\hp\FilmApi\FilmApi.API\obj\Debug\net8.0\FilmApi.API.csproj.AssemblyReference.cache
-C:\Users\hp\FilmApi\FilmApi.API\obj\Debug\net8.0\FilmApi.API.GeneratedMSBuildEditorConfig.editorconfig
-C:\Users\hp\FilmApi\FilmApi.API\obj\Debug\net8.0\FilmApi.API.AssemblyInfoInputs.cache
-C:\Users\hp\FilmApi\FilmApi.API\obj\Debug\net8.0\FilmApi.API.AssemblyInfo.cs
-C:\Users\hp\FilmApi\FilmApi.API\obj\Debug\net8.0\FilmApi.API.csproj.CoreCompileInputs.cache
-C:\Users\hp\FilmApi\FilmApi.API\obj\Debug\net8.0\FilmApi.API.MvcApplicationPartsAssemblyInfo.cs
-C:\Users\hp\FilmApi\FilmApi.API\obj\Debug\net8.0\FilmApi.API.MvcApplicationPartsAssemblyInfo.cache
-C:\Users\hp\FilmApi\FilmApi.API\obj\Debug\net8.0\FilmApi.API.sourcelink.json
 C:\Users\hp\FilmApi\FilmApi.API\bin\Debug\net8.0\appsettings.Development.json
 C:\Users\hp\FilmApi\FilmApi.API\bin\Debug\net8.0\appsettings.json
 C:\Users\hp\FilmApi\FilmApi.API\bin\Debug\net8.0\FilmApi.API.exe
@@ -167,6 +159,14 @@ C:\Users\hp\FilmApi\FilmApi.API\bin\Debug\net8.0\FilmApi.Application.pdb
 C:\Users\hp\FilmApi\FilmApi.API\bin\Debug\net8.0\FilmApi.Infrastructure.pdb
 C:\Users\hp\FilmApi\FilmApi.API\bin\Debug\net8.0\FilmApi.Domain.pdb
 C:\Users\hp\FilmApi\FilmApi.API\bin\Debug\net8.0\FilmApi.Models.pdb
+C:\Users\hp\FilmApi\FilmApi.API\obj\Debug\net8.0\FilmApi.API.csproj.AssemblyReference.cache
+C:\Users\hp\FilmApi\FilmApi.API\obj\Debug\net8.0\FilmApi.API.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\hp\FilmApi\FilmApi.API\obj\Debug\net8.0\FilmApi.API.AssemblyInfoInputs.cache
+C:\Users\hp\FilmApi\FilmApi.API\obj\Debug\net8.0\FilmApi.API.AssemblyInfo.cs
+C:\Users\hp\FilmApi\FilmApi.API\obj\Debug\net8.0\FilmApi.API.csproj.CoreCompileInputs.cache
+C:\Users\hp\FilmApi\FilmApi.API\obj\Debug\net8.0\FilmApi.API.MvcApplicationPartsAssemblyInfo.cs
+C:\Users\hp\FilmApi\FilmApi.API\obj\Debug\net8.0\FilmApi.API.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\hp\FilmApi\FilmApi.API\obj\Debug\net8.0\FilmApi.API.sourcelink.json
 C:\Users\hp\FilmApi\FilmApi.API\obj\Debug\net8.0\staticwebassets.build.json
 C:\Users\hp\FilmApi\FilmApi.API\obj\Debug\net8.0\staticwebassets.development.json
 C:\Users\hp\FilmApi\FilmApi.API\obj\Debug\net8.0\staticwebassets\msbuild.FilmApi.API.Microsoft.AspNetCore.StaticWebAssets.props
