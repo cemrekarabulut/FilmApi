@@ -34,12 +34,6 @@ namespace FilmApi.Application.Service.Impl
         public async Task AddAsync(CreateCategoryDto createCategory)
         {
             var category = _mapper.Map<Category>(createCategory);
-
-            foreach (var film in category.Films)
-            {
-                film.FilmCategory = category.CategoryName;
-                
-            }
             await _categoryRepository.AddAsync(category);
         }
         public async Task<ResultCategoryDto> GetByIdAsync(int id)

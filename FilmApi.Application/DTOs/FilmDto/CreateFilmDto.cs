@@ -12,6 +12,6 @@ namespace FilmApi.Application.DTOs.FilmDto
 
         public int Imdb { get; set; }
 
-        public int CategoryId { get; set; }
+        public List<int> CategoryIds { get; set; }
     }
 }

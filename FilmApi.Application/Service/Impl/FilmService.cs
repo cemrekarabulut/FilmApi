@@ -15,10 +15,12 @@ namespace FilmApi.Application.Service.Impl
     public class FilmService : IFilmService
     {
         private readonly IFilmRepository _filmRepository;
+        private readonly ICategoryRepository _categoryRepository;
         private readonly IMapper _mapper;
-        public FilmService(IFilmRepository filmRepository, IMapper mapper)
+        public FilmService(IFilmRepository filmRepository, IMapper mapper,ICategoryRepository categoryRepository)
         {
             _filmRepository = filmRepository;
+            _categoryRepository = categoryRepository;
             _mapper = mapper;
         }
 
@@ -30,8 +32,23 @@ namespace FilmApi.Application.Service.Impl
 
         public async Task AddAsync(CreateFilmDto createFilm)
         {
-            var film = _mapper.Map<Film>(createFilm);
-            await _filmRepository.AddAsync(film);
+             var film = _mapper.Map<Film>(createFilm);
+
+        film.Categories.Clear();
+         foreach (var categoryId in createFilm.CategoryIds)
+        {
+        var category = await _categoryRepository.GetByIdAsync(categoryId);
+        if (category != null)
+        {
+            film.Categories.Add(category);
+        }
+        else
+        {
+            throw new Exception($"Kategori bulunamadı: {categoryId}");
+        }
+        }
+
+          await _filmRepository.AddAsync(film);
         }
 
         public async Task<ResultFilmDto> GetByIdAsync(int id)

@@ -51,10 +51,9 @@ namespace FilmApi.Application.Mappers
              .ForMember(dest => dest.FilmName, opt => opt.MapFrom(src => src.FilmName))
              .ForMember(dest => dest.FilmId, opt => opt.Ignore());*/
 
-            CreateMap<CreateFilmWithoutCategoryIdDto, Film>()
-            .ForMember(dest => dest.CategoryId, opt => opt.Ignore())  // DTO'da yoksa ignore et
-            .ForMember(dest => dest.FilmId, opt => opt.Ignore());  // Id otomatik olsun
-
+          CreateMap<CreateFilmWithoutCategoryIdDto, Film>()
+         .ForMember(dest => dest.Categories, opt => opt.Ignore())  // CategoryId yerine Categories
+         .ForMember(dest => dest.FilmId, opt => opt.Ignore());     // Id otomatik olsun
 
             CreateMap<CreateCategoryDto, Category>()
             .ForMember(dest => dest.CategoryId, opt => opt.Ignore())
@@ -65,16 +64,28 @@ namespace FilmApi.Application.Mappers
             CreateMap<CreateCategoryDto, Category>()
             .ForMember(dest => dest.Films, opt => opt.MapFrom(src => src.Films));
             CreateMap<CreateFilmWithoutCategoryIdDto, Film>();
-            
-             CreateMap<Person, ResultPersonDto>()
-            .ForMember(dest => dest.Gender, opt => opt.MapFrom(src => src.Gender.Name))
-            .ForMember(dest => dest.Job, opt => opt.MapFrom(src => src.Feature.Job));
 
-             CreateMap<CreatePersonDto, Person>()
-            .ForMember(dest => dest.Gender, opt => opt.MapFrom(src => Gender.FromName(src.Gender)));
+            CreateMap<Person, ResultPersonDto>()
+           .ForMember(dest => dest.Gender, opt => opt.MapFrom(src => src.Gender.Name))
+           .ForMember(dest => dest.Job, opt => opt.MapFrom(src => src.Feature.Job));
 
-        // Film Mapping
-             CreateMap<Film, ResultFilmDto>().ReverseMap();
+            CreateMap<CreatePersonDto, Person>()
+           .ForMember(dest => dest.Gender, opt => opt.MapFrom(src => Gender.FromName(src.Gender)));
+
+            // Film Mapping
+            CreateMap<Film, ResultFilmDto>().ReverseMap();
+             
+            CreateMap<Film, ResultFilmDto>()
+            .ForMember(dest => dest.CategoryIds,
+               opt => opt.MapFrom(src => src.Categories.Select(c => c.CategoryId).ToList()))
+            .ReverseMap()
+            .ForMember(dest => dest.Categories,
+               opt => opt.Ignore());  // ReverseMap'te kategorileri ignore et, çünkü burada doğrudan ekleyemeyiz
+
+            CreateMap<CreateFilmDto, Film>()
+            .ForMember(dest => dest.Categories,
+               opt => opt.Ignore()); // Kategorileri ayrı bir servis/metot ile ekle
+
         }
     }
 }

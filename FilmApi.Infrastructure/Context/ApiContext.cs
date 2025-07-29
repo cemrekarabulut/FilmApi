@@ -23,7 +23,7 @@ namespace FilmApi.Infrastructure.Context
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            
+
             modelBuilder.Entity<Film>()
                 .HasMany(f => f.Categories)
                 .WithMany(c => c.Films)
@@ -37,7 +37,7 @@ namespace FilmApi.Infrastructure.Context
             modelBuilder.Entity<Person>()
                 .Property(a => a.Gender)
                 .HasConversion(
-                    g => g.Name,             
+                    g => g.Name,
                     name => Gender.FromName(name)
                 );
 
@@ -45,5 +45,7 @@ namespace FilmApi.Infrastructure.Context
         }
 
         public ApiContext(DbContextOptions<ApiContext> options) : base(options) { }
+        public ApiContext() { }
     }
+        
 }
