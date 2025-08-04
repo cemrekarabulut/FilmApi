@@ -9,6 +9,18 @@ using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowReactApp",
+        policy =>
+        {
+            policy.WithOrigins("http://localhost:3001") // React uygulamanın adresi
+                  .AllowAnyHeader()
+                  .AllowAnyMethod();
+        });
+});
+
+
 builder.Services.AddDbContext<ApiContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
@@ -35,10 +47,12 @@ builder.Services.AddScoped<IFilmService, FilmService>();
 
 
 
-// ⚠️ EKLENDİ
+
 builder.Services.AddControllers();
 
 var app = builder.Build();
+
+app.UseCors("AllowReactApp");
 
 if (app.Environment.IsDevelopment())
 {
@@ -48,7 +62,12 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
-// ⚠️ EKLENDİ
+app.UseRouting();
+
+app.UseCors("AllowReactApp");
+
+app.UseAuthorization();
+
 app.MapControllers();
 
 app.Run();

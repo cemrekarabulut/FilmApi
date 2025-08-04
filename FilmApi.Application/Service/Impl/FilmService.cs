@@ -8,6 +8,7 @@ using FilmApi.Domain.Entities;
 using FilmApi.Infrastructure.Repositories;
 using AutoMapper;
 using FilmApi.Application.DTOs.FilmDto;
+using FilmApi.Application.DTOs.PersonDto;
 
 
 namespace FilmApi.Application.Service.Impl
@@ -17,7 +18,7 @@ namespace FilmApi.Application.Service.Impl
         private readonly IFilmRepository _filmRepository;
         private readonly ICategoryRepository _categoryRepository;
         private readonly IMapper _mapper;
-        public FilmService(IFilmRepository filmRepository, IMapper mapper,ICategoryRepository categoryRepository)
+        public FilmService(IFilmRepository filmRepository, IMapper mapper, ICategoryRepository categoryRepository)
         {
             _filmRepository = filmRepository;
             _categoryRepository = categoryRepository;
@@ -32,30 +33,45 @@ namespace FilmApi.Application.Service.Impl
 
         public async Task AddAsync(CreateFilmDto createFilm)
         {
-             var film = _mapper.Map<Film>(createFilm);
+            var film = _mapper.Map<Film>(createFilm);
 
-        film.Categories.Clear();
-         foreach (var categoryId in createFilm.CategoryIds)
-        {
-        var category = await _categoryRepository.GetByIdAsync(categoryId);
-        if (category != null)
-        {
-            film.Categories.Add(category);
-        }
-        else
-        {
-            throw new Exception($"Kategori bulunamadı: {categoryId}");
-        }
-        }
+            film.Categories.Clear();
+            foreach (var categoryId in createFilm.CategoryIds)
+            {
+                var category = await _categoryRepository.GetByIdAsync(categoryId);
+                if (category != null)
+                {
+                    film.Categories.Add(category);
+                }
+                else
+                {
+                    throw new Exception($"Kategori bulunamadı: {categoryId}");
+                }
+            }
 
-          await _filmRepository.AddAsync(film);
+            await _filmRepository.AddAsync(film);
         }
 
         public async Task<ResultFilmDto> GetByIdAsync(int id)
-        {
-            var film = await _filmRepository.GetByIdAsync(id);
-            return _mapper.Map<ResultFilmDto>(film);
-        }
+{
+    var film = await _filmRepository.GetByIdAsync(id);
+    if (film == null)
+        return null;
+
+    var dto = _mapper.Map<ResultFilmDto>(film);
+
+    // Persons listesinden Actor ve Director ayrımı yap
+    dto.Actors = film.Persons
+        .Where(p => p.Job == "Actor")
+        .Select(p => _mapper.Map<ResultPersonDto>(p))
+        .ToList();
+
+    var director = film.Persons.FirstOrDefault(p => p.Job == "Director");
+    dto.Director = director != null ? _mapper.Map<ResultPersonDto>(director) : null;
+
+    return dto;
+}
+
 
         public async Task UpdateAsync(UpdateFilmDto updateFilm)
         {
@@ -70,6 +86,11 @@ namespace FilmApi.Application.Service.Impl
             {
                 await _filmRepository.DeleteAsync(film);
             }
+        }
+        public async Task<List<ResultFilmDto>> GetFilmsByCategoryAsync(string categoryName)
+        {
+            var films = await _filmRepository.GetByCategoryAsync(categoryName);
+            return _mapper.Map<List<ResultFilmDto>>(films);
         }
     }
 }

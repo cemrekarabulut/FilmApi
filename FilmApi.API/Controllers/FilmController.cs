@@ -46,7 +46,7 @@ namespace FilmApi.API.Controllers
         [HttpPut]
         public async Task<IActionResult> UpdateFilm(UpdateFilmDto updateFilm)
         {
-           await _filmService.UpdateAsync(updateFilm);
+            await _filmService.UpdateAsync(updateFilm);
             return Ok("Film güncellendi.");
         }
 
@@ -58,6 +58,12 @@ namespace FilmApi.API.Controllers
                 return NotFound("Film bulunamadı.");
             await _filmService.DeleteAsync(id);
             return Ok("Film silindi.");
+        }
+        [HttpGet("category/{categoryName}")]
+        public async Task<IActionResult> GetFilmsByCategory(string categoryName)
+        {
+            var films = await _filmService.GetFilmsByCategoryAsync(categoryName);
+            return Ok(films);
         }
     }
 }

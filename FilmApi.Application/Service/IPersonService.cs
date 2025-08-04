@@ -20,6 +20,8 @@ namespace FilmApi.Application.Service
         Task DeleteAsync(int id);
         Task<List<ResultFilmDto>> GetFilmsByActorIdAsync(int actorId);
         Task AddFilmToActorAsync(int actorId, int filmId);
+        Task<List<ResultPersonDto>> GetByFeatureAsync(string featureName);
+        
     }
 
 }

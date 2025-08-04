@@ -14,5 +14,13 @@ namespace FilmApi.Infrastructure.Repositories.Impl
         {
             return await _dbSet.FirstOrDefaultAsync(x => x.NameSurname == name);
         }
+        public async Task<List<Person>> GetByFeatureAsync(string featureName)
+        {
+             return await _context.Persons
+            .Include(p => p.Feature)
+            .Where(p => p.Feature.Job == featureName)
+            .ToListAsync();
+        }
+
     }
 }  

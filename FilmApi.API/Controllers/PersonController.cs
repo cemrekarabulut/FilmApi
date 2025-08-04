@@ -70,13 +70,21 @@ namespace FilmApi.API.Controllers
             _personService.UpdateAsync(updatePerson);
             return Ok("Kişi güncelleme işlemi başarılı");
         }
-        
+
         [HttpPost("{actorId}/add-film/{filmId}")]
         public async Task<IActionResult> AddFilmToActor(int actorId, int filmId)
         {
-        await _personService.AddFilmToActorAsync(actorId, filmId);
-        return Ok("Film başarıyla aktöre eklendi.");
+            await _personService.AddFilmToActorAsync(actorId, filmId);
+            return Ok("Film başarıyla aktöre eklendi.");
         }
+        
+        [HttpGet("by-feature/{featureName}")]
+        public async Task<IActionResult> GetPersonsByFeature(string featureName)
+        {
+        var persons = await _personService.GetByFeatureAsync(featureName);
+        return Ok(persons);
+        }
+
 
     }
 }

@@ -13,10 +13,11 @@ namespace FilmApi.Application.Service
 {
     public interface IFilmService
     {
-    Task<List<ResultFilmDto>> GetAllAsync();
-    Task AddAsync(CreateFilmDto createFeature);
-    Task<ResultFilmDto> GetByIdAsync(int id);
-    Task UpdateAsync(UpdateFilmDto updateFeature);
-    Task DeleteAsync(int id);
+        Task<List<ResultFilmDto>> GetAllAsync();
+        Task AddAsync(CreateFilmDto createFeature);
+        Task<ResultFilmDto> GetByIdAsync(int id);
+        Task UpdateAsync(UpdateFilmDto updateFeature);
+        Task DeleteAsync(int id);
+        Task<List<ResultFilmDto>> GetFilmsByCategoryAsync(string categoryName);
     }
 }

@@ -18,6 +18,7 @@ namespace FilmApi.Domain.Entities
 
         public int FeatureId { get; set; }
         public Feature Feature { get; set; }
+        public string Job { get; set; }
         
         public ICollection<Film> Films { get; set; } = new List<Film>();
 

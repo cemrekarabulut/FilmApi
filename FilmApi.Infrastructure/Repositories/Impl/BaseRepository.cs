@@ -51,7 +51,7 @@ namespace FilmApi.Infrastructure.Repositories.Impl
         return _dbSet.FirstOrDefaultAsync(predicate);
     }
 
-    public async Task<TEntity> GetByIdAsync(int id)
+    public virtual async Task<TEntity> GetByIdAsync(int id)
     {
         return await _dbSet.FindAsync(id);
     }

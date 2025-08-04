@@ -9,6 +9,8 @@ namespace FilmApi.Infrastructure.Repositories
     public interface IPersonRepository : IBaseRepository<Person>
     {
         Task<Person> GetPersonByName(string name);
+        Task<List<Person>> GetByFeatureAsync(string featureName);
+
     }
 }
 

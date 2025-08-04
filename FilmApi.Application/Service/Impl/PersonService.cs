@@ -64,20 +64,26 @@ namespace FilmApi.Application.Service.Impl
 
             return _mapper.Map<List<ResultFilmDto>>(actor.Films);
         }
-        
+
         public async Task AddFilmToActorAsync(int actorId, int filmId)
-{
-           var actor = await _personRepository.GetByIdAsync(actorId);
-           if (actor == null || actor.Feature.Job != "Actor")
-           throw new Exception("Bu kişi aktör değil.");
+        {
+            var actor = await _personRepository.GetByIdAsync(actorId);
+            if (actor == null || actor.Feature.Job != "Actor")
+                throw new Exception("Bu kişi aktör değil.");
 
-           var film = await _filmRepository.GetByIdAsync(filmId);
-           if (film == null)
-           throw new Exception("Film bulunamadı.");
+            var film = await _filmRepository.GetByIdAsync(filmId);
+            if (film == null)
+                throw new Exception("Film bulunamadı.");
 
-           actor.Films.Add(film);
-           await _personRepository.UpdateAsync(actor);
-}
+            actor.Films.Add(film);
+            await _personRepository.UpdateAsync(actor);
+        }
+        public async Task<List<ResultPersonDto>> GetByFeatureAsync(string featureName)
+        {
+            var persons = await _personRepository.GetByFeatureAsync(featureName);
+            return _mapper.Map<List<ResultPersonDto>>(persons);
+        }
+
 
     }
 

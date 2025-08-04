@@ -9,6 +9,8 @@ namespace FilmApi.Application.DTOs.PersonDto
     {
         public int PersonId { get; set; }
 
+        public string featureName { get; set; }
+
         public string NameSurname { get; set; }
 
         public string Gender { get; set; }
