@@ -1,86 +1,94 @@
 
-# 📽️ FilmApi – Film Bilgi ve Yönetim Sistemi
+# FilmApi
 
-**FilmApi**, film bilgilerini yönetmek ve erişmek için geliştirilmiş bir RESTful Web API uygulamasıdır. Bu API üzerinden film adı, açıklaması, türü, oyuncuları ve yapım yılı gibi bilgiler sorgulanabilir, eklenebilir, güncellenebilir veya silinebilir. 
+FilmApi; film, kategori, kisi, yorum ve ozellik yonetimi icin gelistirilmis katmanli bir ASP.NET Core Web API projesidir.
 
----
+## Neden Bu Proje?
 
-## 🚀 Özellikler
-- Film listesi görüntüleme
-- Yeni film ekleme
-- Film bilgisi güncelleme
-- Film silme
-- Oyuncu, yönetmen, tür gibi özelliklerle ilişkili veri yönetimi
-- DTO (Data Transfer Object) katmanı ile veri taşımada ayrıştırılmış yapı
-- Katmanlı mimari (Domain, Application, Infrastructure, API)
+- Katmanli mimari ile sorumluluklari ayirir: `API`, `Application`, `Domain`, `Infrastructure`.
+- DTO ve servis yapisi ile controller seviyesinde sade ve okunabilir akis sunar.
+- Swagger ile hizli endpoint testine imkan verir.
+- EF Core ile SQL Server tarafinda tutarli veri erisimi saglar.
 
----
+## Teknolojiler
 
-## 🧱 Kullanılan Teknolojiler
+- `.NET 8`
+- `ASP.NET Core Web API`
+- `Entity Framework Core`
+- `SQL Server`
+- `AutoMapper`
+- `FluentValidation`
+- `Swagger / Swashbuckle`
 
-| Teknoloji        | Açıklama                     |
-|------------------|------------------------------|
-| .NET 8           | Backend geliştirme           |
-| ASP.NET Core Web API | RESTful servis altyapısı     |
-| Entity Framework Core | ORM & veri erişimi        |
-| SQL Server       | Veritabanı yönetimi          |
-| AutoMapper       | DTO ↔ Entity dönüşümleri     |
-| Swagger (Swashbuckle) | API dokümantasyonu       |
-| C#               | Backend dili                 |
-
----
-
-## 📁 Proje Yapısı
+## Mimari
 
 ```
 FilmApi/
-├── API/                # Sunucu giriş noktası (Controller'lar burada)
-├── Application/        # Servis katmanı ve DTO'lar
-├── Domain/             # Entity sınıfları
-├── Infrastructure/     # Veri erişimi ve DB context
-├── FilmApi.sln         # Çözüm dosyası
+├── FilmApi.API/             # Controller, Program, DI, middleware
+├── FilmApi.Application/     # Service abstractions/implementations, DTO, mapper
+├── FilmApi.Domain/          # Entity ve domain kurallari
+├── FilmApi.Infrastructure/  # DbContext, repository implementasyonlari
+├── FilmApi.Models/          # API request modelleri
+└── FilmApi.sln
 ```
 
----
+## Hemen Basla
 
-## ⚙️ Kurulum ve Çalıştırma
+1. Projeyi klonla:
 
-> 💡 Geliştirme ortamı: Visual Studio 2022 veya VS Code + .NET 8 SDK
+```bash
+git clone https://github.com/cemrekarabulut/FilmApi.git
+cd FilmApi
+```
 
-1. **Projeyi klonla:**
-   ```bash
-   git clone https://github.com/kullaniciAdi/FilmApi.git
-   cd FilmApi
-   ```
+2. Veritabani baglantisini ayarla (`FilmApi.API/appsettings.json`):
 
-2. **Veritabanını ayarla:**
-   - `appsettings.json` içinde `ConnectionStrings` kısmını kendi veritabanına göre düzenle.
-   - Migration ve veritabanı oluştur:
-     ```bash
-     dotnet ef database update
-     ```
+```json
+"ConnectionStrings": {
+  "DefaultConnection": "Server=.;Database=FilmApiDb;Trusted_Connection=True;TrustServerCertificate=True;"
+}
+```
 
-3. **Projeyi çalıştır:**
-   ```bash
-   dotnet run --project FilmApi.API
-   ```
+3. Migration uygula:
 
-4. **Swagger ile test et:**
-   - Tarayıcıda `https://localhost:5001/swagger` adresine git.  
-   - API endpoint’lerini burada test edebilirsin.
+```bash
+dotnet ef database update --project FilmApi.Infrastructure --startup-project FilmApi.API
+```
 
----
+4. Uygulamayi calistir:
 
-## 📌 Örnek Endpoint'ler
+```bash
+dotnet run --project FilmApi.API
+```
 
-| Endpoint             | Yöntem | Açıklama           |
-|----------------------|--------|--------------------|
-| `/api/films`         | GET    | Tüm filmleri getir |
-| `/api/films/{id}`    | GET    | Belirli film        |
-| `/api/films`         | POST   | Yeni film ekle      |
-| `/api/films/{id}`    | PUT    | Film güncelle       |
-| `/api/films/{id}`    | DELETE | Film sil            |
+5. Swagger arayuzune git:
 
----
+- `https://localhost:xxxx/swagger`
 
+## Ornek Endpointler
 
+| Method | Endpoint | Aciklama |
+|---|---|---|
+| `GET` | `/api/films` | Tum filmleri listeler |
+| `GET` | `/api/films/{id}` | Filme gore detay getirir |
+| `POST` | `/api/films` | Yeni film olusturur |
+| `PUT` | `/api/films/{id}` | Film gunceller |
+| `DELETE` | `/api/films/{id}` | Film siler |
+
+## Projede Yapilan Iyilestirmeler
+
+- Build artifact'lari (`bin/obj`) versiyon kontrolunden cikarildi.
+- Depo kokune `.gitignore` eklendi.
+- Kod stili standardizasyonu icin `.editorconfig` eklendi.
+- `Film.TicketPrice` alaninda EF Core precision konfigrasyonu eklenerek olasi truncation riski giderildi.
+- README daha profesyonel ve onboarding odakli hale getirildi.
+
+## Gelistirme Komutlari
+
+```bash
+dotnet restore
+dotnet build FilmApi.sln
+dotnet test
+```
+
+> Not: Projede test projesi yoksa `dotnet test` adimi test calistirmadan tamamlanir.

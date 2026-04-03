@@ -1,4 +1,3 @@
-using System;
 using Microsoft.EntityFrameworkCore;
 using FilmApi.Domain.Entities;
 using FilmApi.Domain.Enumeration;
@@ -7,13 +6,7 @@ namespace FilmApi.Infrastructure.Context
 {
     public class ApiContext : DbContext
     {
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            if (!optionsBuilder.IsConfigured)
-            {
-                optionsBuilder.UseSqlServer("Server=LAPTOP-PS5F1P6O\\SQLEXPRESS;Initial Catalog=ApiFilmDb;Integrated Security=True;TrustServerCertificate=True;");
-            }
-        }
+        public ApiContext(DbContextOptions<ApiContext> options) : base(options) { }
 
         public DbSet<Person> Persons { get; set; }
         public DbSet<Category> Categories { get; set; }
@@ -23,6 +16,9 @@ namespace FilmApi.Infrastructure.Context
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<Film>()
+                .Property(f => f.TicketPrice)
+                .HasPrecision(18, 2);
 
             modelBuilder.Entity<Film>()
                 .HasMany(f => f.Categories)
@@ -37,15 +33,11 @@ namespace FilmApi.Infrastructure.Context
             modelBuilder.Entity<Person>()
                 .Property(a => a.Gender)
                 .HasConversion(
-                    g => g.Name,
-                    name => Gender.FromName(name)
+                    g => g != null ? g.Name : null,
+                    name => name != null ? Gender.FromName(name) : null
                 );
 
             base.OnModelCreating(modelBuilder);
         }
-
-        public ApiContext(DbContextOptions<ApiContext> options) : base(options) { }
-        public ApiContext() { }
     }
-        
 }
