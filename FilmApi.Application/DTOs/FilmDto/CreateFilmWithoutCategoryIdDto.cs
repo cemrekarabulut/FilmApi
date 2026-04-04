@@ -1,17 +1,17 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using System.ComponentModel.DataAnnotations;
 
 namespace FilmApi.Application.DTOs.FilmDto
 {
     public class CreateFilmWithoutCategoryIdDto
     {
-        public string FilmName { get; set; }
+        [Required(ErrorMessage = "Film adı zorunludur.")]
+        [MaxLength(200)]
+        public required string FilmName { get; set; }
 
+        [Range(0, double.MaxValue)]
         public decimal TicketPrice { get; set; }
 
-        public int Imdb { get; set; }
-
+        [Range(0.0, 10.0)]
+        public double ImdbRating { get; set; }
     }
 }

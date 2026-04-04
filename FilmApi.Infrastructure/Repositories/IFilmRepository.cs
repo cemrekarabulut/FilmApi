@@ -1,14 +1,10 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using FilmApi.Domain.Entities;
 
 namespace FilmApi.Infrastructure.Repositories
 {
     public interface IFilmRepository : IBaseRepository<Film>
     {
-       Task<List<Film>> GetByCategoryAsync(string categoryName); 
+        Task<List<Film>> GetByCategoryAsync(string categoryName);
+        Task<List<Film>> GetAllWithDetailsAsync();
     }
 }
-    

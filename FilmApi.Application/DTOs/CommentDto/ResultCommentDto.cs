@@ -1,22 +1,12 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
 namespace FilmApi.Application.DTOs.CommentDto
 {
     public class ResultCommentDto
     {
         public int CommentId { get; set; }
-
-        public string NameSurname { get; set; }
-
-        public string Email { get; set; }
-
-        public string Subject { get; set; }
-
-        public string MessageDetails { get; set; }
-
-        public DateTime SendDate{ get; set; } 
+        public string NameSurname { get; set; } = string.Empty;
+        public string Email { get; set; } = string.Empty;
+        public string Subject { get; set; } = string.Empty;
+        public string MessageDetails { get; set; } = string.Empty;
+        public DateTime CreatedAt { get; set; }
     }
 }

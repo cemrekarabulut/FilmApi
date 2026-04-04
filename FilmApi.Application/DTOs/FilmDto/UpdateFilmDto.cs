@@ -1,22 +1,22 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using System.ComponentModel.DataAnnotations;
 
 namespace FilmApi.Application.DTOs.FilmDto
 {
     public class UpdateFilmDto
     {
+        [Required]
         public int FilmId { get; set; }
 
-        public string FilmName { get; set; }
+        [Required(ErrorMessage = "Film adı zorunludur.")]
+        [MaxLength(200)]
+        public required string FilmName { get; set; }
 
-        public string FilmCategory { get; set; }
-
+        [Range(0, double.MaxValue, ErrorMessage = "Bilet fiyatı 0 veya daha büyük olmalıdır.")]
         public decimal TicketPrice { get; set; }
 
-        public int Imdb{ get; set;}
+        [Range(0.0, 10.0, ErrorMessage = "IMDb puanı 0.0 ile 10.0 arasında olmalıdır.")]
+        public double ImdbRating { get; set; }
 
-        public int CategoryId { get; set; } 
+        public List<int>? CategoryIds { get; set; }
     }
 }

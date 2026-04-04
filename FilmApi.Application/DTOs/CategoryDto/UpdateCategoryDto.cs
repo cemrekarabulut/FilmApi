@@ -1,17 +1,14 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using FilmApi.Domain.Entities; // veya Film class'ı hangi namespace içindeyse
+using System.ComponentModel.DataAnnotations;
 
 namespace FilmApi.Application.DTOs.CategoryDto
 {
     public class UpdateCategoryDto
     {
-        public int CategoryId{ get ; set;}
+        [Required]
+        public int CategoryId { get; set; }
 
-        public string CategoryName{ get ; set;}
-
-       // public List<Film> Films { get ; set;} 
+        [Required(ErrorMessage = "Kategori adı zorunludur.")]
+        [MaxLength(100)]
+        public required string CategoryName { get; set; }
     }
 }

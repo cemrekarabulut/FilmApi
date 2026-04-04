@@ -1,18 +1,17 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using System.ComponentModel.DataAnnotations;
 
 namespace FilmApi.Application.DTOs.FeatureDto
 {
     public class UpdateFeatureDto
     {
+        [Required]
         public int FeatureId { get; set; }
 
-        public string Job { get; set; }
+        [Required(ErrorMessage = "Görev/meslek alanı zorunludur.")]
+        [MaxLength(100)]
+        public required string Job { get; set; }
 
-        public string Description { get; set; }
-
-        public string Image { get; set; }   
+        [MaxLength(500)]
+        public string? Description { get; set; }
     }
 }
