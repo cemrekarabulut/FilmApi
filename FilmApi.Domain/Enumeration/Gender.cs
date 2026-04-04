@@ -1,40 +1,39 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
 namespace FilmApi.Domain.Enumeration
 {
-    public class Gender
+    public class Gender : IEquatable<Gender>
     {
-        public string Name { get; private set; }
+        public string Name { get; }
 
-        // Statik hazır Gender nesneleri
-        public static readonly Gender Male = new Gender("Male");
-        public static readonly Gender Female = new Gender("Female");
-        public static readonly Gender Unknown = new Gender("Unknown");
+        public static readonly Gender Male = new("Male");
+        public static readonly Gender Female = new("Female");
+        public static readonly Gender Unknown = new("Unknown");
 
-        // Private constructor
-        private Gender(string name)
-        {
-            Name = name;
-        }
+        private Gender(string name) => Name = name;
 
-        // FromName metodu burada
         public static Gender FromName(string name)
         {
             if (string.IsNullOrWhiteSpace(name))
-                throw new ArgumentException("Gender name cannot be empty.");
+                return Unknown;
 
-            var normalized = name.Trim().ToLowerInvariant();
-
-            if (normalized == "male") return Male;
-            if (normalized == "female") return Female;
-
-            throw new ArgumentException($"Invalid gender name: {name}");
+            return name.Trim().ToLowerInvariant() switch
+            {
+                "male" => Male,
+                "female" => Female,
+                "unknown" => Unknown,
+                _ => throw new ArgumentException($"Geçersiz cinsiyet değeri: '{name}'. Geçerli değerler: Male, Female, Unknown.")
+            };
         }
 
-        // İstersen Equals, GetHashCode override edebilirsin
+        public bool Equals(Gender? other)
+        {
+            if (other is null) return false;
+            return string.Equals(Name, other.Name, StringComparison.OrdinalIgnoreCase);
+        }
+
+        public override bool Equals(object? obj) => obj is Gender other && Equals(other);
+
+        public override int GetHashCode() => Name.ToLowerInvariant().GetHashCode();
+
+        public override string ToString() => Name;
     }
 }
-

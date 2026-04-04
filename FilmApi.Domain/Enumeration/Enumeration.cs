@@ -17,13 +17,13 @@ namespace FilmApi.Domain.Enumeration
 
         public override string ToString() => Name;
 
-        public bool Equals(Enumeration<TEnum> other)
+        public bool Equals(Enumeration<TEnum>? other)
         {
             if (other is null) return false;
             return Id == other.Id && GetType() == other.GetType();
         }
 
-        public override bool Equals(object obj)
+        public override bool Equals(object? obj)
         {
             return obj is Enumeration<TEnum> other && Equals(other);
         }
