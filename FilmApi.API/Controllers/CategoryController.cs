@@ -1,17 +1,12 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-//using FilmApi.Models.CategoryModels;
 using FilmApi.Application.Service;
-//using FilmApi.Domain.Entities;
 using FilmApi.Application.DTOs.CategoryDto;
 
 namespace FilmApi.API.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
+    [Produces("application/json")]
     public class CategoryController : ControllerBase
     {
         private readonly ICategoryService _categoryService;
@@ -21,54 +16,79 @@ namespace FilmApi.API.Controllers
             _categoryService = categoryService;
         }
 
+        /// <summary>Tüm kategorileri listeler.</summary>
         [HttpGet]
+        [ProducesResponseType(typeof(List<ResultCategoryDto>), StatusCodes.Status200OK)]
         public async Task<IActionResult> GetAllCategories()
         {
-             List<ResultCategoryDto> categories = await _categoryService.GetAllAsync();
+            var categories = await _categoryService.GetAllAsync();
             return Ok(categories);
-        }
-        [HttpGet("withFilms")]
-        public async Task<IActionResult> GetAllCategoriesWithFilms()
-        {
-             List<ResultCategoryWithFilmsDto> categories = await _categoryService.GetAllWithFilmsAsync();
-            return Ok(categories);
-        }
-        [HttpPost]
-        public async Task<IActionResult> CreateCategory(CreateCategoryDto createCategory)
-        {
-            await _categoryService.AddAsync(createCategory);
-            return Ok("Kategori başarıyla eklendi.");
         }
 
-        [HttpGet("{id}")]
+        /// <summary>Kategorileri filmleriyle birlikte listeler.</summary>
+        [HttpGet("with-films")]
+        [ProducesResponseType(typeof(List<ResultCategoryWithFilmsDto>), StatusCodes.Status200OK)]
+        public async Task<IActionResult> GetAllCategoriesWithFilms()
+        {
+            var categories = await _categoryService.GetAllWithFilmsAsync();
+            return Ok(categories);
+        }
+
+        /// <summary>ID'ye göre kategori getirir.</summary>
+        [HttpGet("{id:int}")]
+        [ProducesResponseType(typeof(ResultCategoryDto), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<IActionResult> GetCategory(int id)
         {
             var category = await _categoryService.GetByIdAsync(id);
-            if (category == null)
-                return NotFound("Kategori bulunamadı.");
+            if (category is null)
+                return NotFound(new { message = $"ID {id} ile kategori bulunamadı." });
+
             return Ok(category);
         }
 
-        [HttpPut]
-        public async Task<IActionResult> UpdateCategory(UpdateCategoryDto updateCategory)
+        /// <summary>Yeni kategori ekler.</summary>
+        [HttpPost]
+        [ProducesResponseType(StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<IActionResult> CreateCategory([FromBody] CreateCategoryDto createCategory)
         {
-         await _categoryService.UpdateAsync(updateCategory);
-            return Ok("Kategori güncellendi.");
+            await _categoryService.AddAsync(createCategory);
+            return StatusCode(StatusCodes.Status201Created, new { message = "Kategori başarıyla eklendi." });
         }
 
-        [HttpDelete("{id}")]
+        /// <summary>Kategori günceller.</summary>
+        [HttpPut("{id:int}")]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public async Task<IActionResult> UpdateCategory(int id, [FromBody] UpdateCategoryDto updateCategory)
+        {
+            if (id != updateCategory.CategoryId)
+                return BadRequest(new { message = "Route ID ile body ID eşleşmiyor." });
+
+            try
+            {
+                await _categoryService.UpdateAsync(updateCategory);
+                return NoContent();
+            }
+            catch (KeyNotFoundException ex)
+            {
+                return NotFound(new { message = ex.Message });
+            }
+        }
+
+        /// <summary>Kategori siler.</summary>
+        [HttpDelete("{id:int}")]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<IActionResult> DeleteCategory(int id)
         {
             var category = await _categoryService.GetByIdAsync(id);
-            if (category == null)
-                return NotFound("Kategori bulunamadı.");
+            if (category is null)
+                return NotFound(new { message = $"ID {id} ile kategori bulunamadı." });
+
             await _categoryService.DeleteAsync(id);
-            return Ok("Kategori silindi.");
+            return NoContent();
         }
     }
 }
-
-         
-        
-
-        

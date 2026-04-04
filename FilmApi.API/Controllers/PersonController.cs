@@ -1,18 +1,12 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using FilmApi.Domain.Entities;
 using FilmApi.Application.Service;
-using FilmApi.Models.ActorModels;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using FilmApi.Application.DTOs.PersonDto;
 
 namespace FilmApi.API.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
+    [Produces("application/json")]
     public class PersonController : ControllerBase
     {
         private readonly IPersonService _personService;
@@ -22,69 +16,123 @@ namespace FilmApi.API.Controllers
             _personService = personService;
         }
 
+        /// <summary>Tüm kişileri listeler.</summary>
         [HttpGet]
-        public async Task<IActionResult> PersonList()
+        [ProducesResponseType(typeof(List<ResultPersonDto>), StatusCodes.Status200OK)]
+        public async Task<IActionResult> GetAllPersons()
         {
             var persons = await _personService.GetAllAsync();
             return Ok(persons);
         }
 
-        [HttpPost]
-        public async Task<IActionResult> CreatePerson(CreatePersonDto createPerson)
-        {
-            await _personService.AddAsync(createPerson);
-            return Ok("Kişi ekleme işlemi başarılı");
-        }
-
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> DeletePerson(int id)
-        {
-            var person = await _personService.GetByIdAsync(id);
-            if (person == null)
-                return NotFound("Kişi bulunamadı");
-
-            await _personService.DeleteAsync(id);
-            return Ok("Kişi silme başarılı");
-        }
-
-        [HttpGet("{id}")]
+        /// <summary>ID'ye göre kişi getirir.</summary>
+        [HttpGet("{id:int}")]
+        [ProducesResponseType(typeof(ResultPersonDto), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<IActionResult> GetPerson(int id)
         {
             var person = await _personService.GetByIdAsync(id);
-            if (person == null)
-                return NotFound("Kişi bulunamadı");
+            if (person is null)
+                return NotFound(new { message = $"ID {id} ile kişi bulunamadı." });
 
             return Ok(person);
         }
 
-        [HttpGet("{id}/films")]
+        /// <summary>Yeni kişi ekler.</summary>
+        [HttpPost]
+        [ProducesResponseType(StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<IActionResult> CreatePerson([FromBody] CreatePersonDto createPerson)
+        {
+            await _personService.AddAsync(createPerson);
+            return StatusCode(StatusCodes.Status201Created, new { message = "Kişi başarıyla eklendi." });
+        }
+
+        /// <summary>Kişi günceller.</summary>
+        [HttpPut("{id:int}")]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public async Task<IActionResult> UpdatePerson(int id, [FromBody] UpdatePersonDto updatePerson)
+        {
+            if (id != updatePerson.PersonId)
+                return BadRequest(new { message = "Route ID ile body ID eşleşmiyor." });
+
+            try
+            {
+                await _personService.UpdateAsync(updatePerson);
+                return NoContent();
+            }
+            catch (KeyNotFoundException ex)
+            {
+                return NotFound(new { message = ex.Message });
+            }
+        }
+
+        /// <summary>Kişi siler.</summary>
+        [HttpDelete("{id:int}")]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public async Task<IActionResult> DeletePerson(int id)
+        {
+            var person = await _personService.GetByIdAsync(id);
+            if (person is null)
+                return NotFound(new { message = $"ID {id} ile kişi bulunamadı." });
+
+            await _personService.DeleteAsync(id);
+            return NoContent();
+        }
+
+        /// <summary>Aktörün oynadığı filmleri getirir.</summary>
+        [HttpGet("{id:int}/films")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> GetFilmsByActor(int id)
         {
-            var films = await _personService.GetFilmsByActorIdAsync(id);
-            return Ok(films);
+            try
+            {
+                var films = await _personService.GetFilmsByActorIdAsync(id);
+                return Ok(films);
+            }
+            catch (KeyNotFoundException ex)
+            {
+                return NotFound(new { message = ex.Message });
+            }
+            catch (InvalidOperationException ex)
+            {
+                return BadRequest(new { message = ex.Message });
+            }
         }
 
-        [HttpPut]
-        public IActionResult UpdatePerson(UpdatePersonDto updatePerson)
-        {
-            _personService.UpdateAsync(updatePerson);
-            return Ok("Kişi güncelleme işlemi başarılı");
-        }
-
-        [HttpPost("{actorId}/add-film/{filmId}")]
+        /// <summary>Aktöre film ekler.</summary>
+        [HttpPost("{actorId:int}/add-film/{filmId:int}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> AddFilmToActor(int actorId, int filmId)
         {
-            await _personService.AddFilmToActorAsync(actorId, filmId);
-            return Ok("Film başarıyla aktöre eklendi.");
+            try
+            {
+                await _personService.AddFilmToActorAsync(actorId, filmId);
+                return Ok(new { message = "Film başarıyla aktöre eklendi." });
+            }
+            catch (KeyNotFoundException ex)
+            {
+                return NotFound(new { message = ex.Message });
+            }
+            catch (InvalidOperationException ex)
+            {
+                return BadRequest(new { message = ex.Message });
+            }
         }
-        
+
+        /// <summary>Özelliğe (Feature) göre kişileri listeler.</summary>
         [HttpGet("by-feature/{featureName}")]
+        [ProducesResponseType(typeof(List<ResultPersonDto>), StatusCodes.Status200OK)]
         public async Task<IActionResult> GetPersonsByFeature(string featureName)
         {
-        var persons = await _personService.GetByFeatureAsync(featureName);
-        return Ok(persons);
+            var persons = await _personService.GetByFeatureAsync(featureName);
+            return Ok(persons);
         }
-
-
     }
 }
